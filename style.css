@@ -1,0 +1,61 @@
+/* reset webpage default styles */
+* {margin: 0; padding: 0; box-sizing: border-box;}
+
+:root {
+    /* colors */
+    --white-color: #fff;
+    --light-on: #ffd600;
+}
+
+body {
+    width: 100%;
+    height: 100dvh;
+
+    color: var(--white-color);
+    font-size: 16px;
+}
+
+main {
+    width: inherit;
+    height: inherit;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+h1 {
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    letter-spacing: 5px;
+}
+
+.entry_point {
+    width: min(500px, 100%);
+    height: max(100px, 200px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+    border: none;
+    background: transparent;
+}
+
+.entry_point img {
+    width: 100px;
+    aspect-ratio: 1;
+}
+.entry_point > :first-child,
+.entry_point:hover > :nth-child(2) {
+    display: none;
+}
+.entry_point:hover > :first-child {
+    display: block;
+    filter: drop-shadow(2px 2px 35px var(--light-on));
+}
