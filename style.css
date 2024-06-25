@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* reset webpage default styles */
 * {margin: 0; padding: 0; box-sizing: border-box;}
 
@@ -13,6 +15,12 @@ body {
 
     color: var(--white-color);
     font-size: 16px;
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    /* font-weight: <weight>; */
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    overflow: hidden; /* remove if it's causing issues*/
 }
 
 main {
@@ -33,6 +41,11 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     letter-spacing: 5px;
+    font-size: 3rem;
+    overflow: hidden;
+}
+h1 span:first-child {
+    animation: left_slide-in 900ms 3s ease-in-out ;
 }
 
 .entry_point {
@@ -45,6 +58,7 @@ h1 {
     
     border: none;
     background: transparent;
+    cursor: pointer;
 }
 
 .entry_point img {
@@ -58,4 +72,155 @@ h1 {
 .entry_point:hover > :first-child {
     display: block;
     filter: drop-shadow(2px 2px 35px var(--light-on));
+}
+
+/* GRID ROOMS COMPONENT */
+/* .application_container {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr) 100px;
+    grid-auto-rows: min(500px, 100%);
+    gap: 10px;
+}
+.rooms {
+    height: auto;
+    background-color: #ffd600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.main_hall {
+    grid-column: 1/3;
+    grid-row: 1;
+    background-color: #a0ad;
+}
+.bedroom {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    background-color: #00a2;
+}
+.bathroom {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    background: rgba(42, 237, 49, 0.646);
+}
+.garage {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    background-color: rgb(68, 114, 5);
+}
+.guest_room {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    background-color: #03a;
+}
+.kitchen {
+    grid-column: 3/4;
+    grid-row: 2/3;
+    background-color: #f65;
+}
+
+.corridor {
+    grid-column: 1/-1;
+    grid-row: 3;
+} */
+
+/* using flex box to form grid layout */
+.application_container {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    overflow: hidden;
+}
+.flex1,
+.flex2,
+.flex3 {
+    width: 100%;
+    display: flex;
+
+    gap: 20px;
+}
+.flex1,
+.flex2 {
+    flex: 1;
+}
+.flex3 {
+    flex-basis: 100px;
+}
+
+.rooms {
+    height: 100%;
+    background-color: #ffd600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;  
+    flex: 1;
+    cursor: pointer;
+}
+.main_hall {
+    flex-basis: 500px;
+}
+.bedroom {
+    flex-basis: 200px;
+}
+.guest_room {
+    flex-basis: 400px;
+}
+.kitchen, .bathroom, .outside_lights {
+    flex-basis: 300px;
+}
+
+.rooms:active {
+    transform: scale(2);
+    opacity: 0.1;
+    width: 100%;
+    height: 100dvh;
+    position: absolute;
+    top: 0;
+    transition: all 800ms ease-in-out;
+}
+
+
+
+
+
+/* ANIMATIONS */
+@keyframes left_slide-in {
+    0% {
+        position: relative;
+        left: -300px;
+        opacity: 0.1;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+/* SPECIAL CLASSES */
+.hidden {
+    display: none;
 }
