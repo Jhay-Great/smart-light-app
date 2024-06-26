@@ -80,5 +80,25 @@ mainRoomsContainer.addEventListener('click', function (e) {
     }
 })
 
+mainRoomsContainer.addEventListener('change', function(e) {
+    if (!e.target.closest('.slider')) return;
+    
+    const slider = e.target;
+    const lightSwitch = slider.closest('.basic_settings').querySelector('.basic_settings_buttons button:first-child img');
+
+    const intensity = slider.value;
+
+    /**when slider is moved
+     * the light should be turned on
+     * the slide should start from 0 by default
+     * when off at an intensity of whatever and the light is put on the light should reflect the level of intensity
+     */
+    
+    // lightSwitch.style.filter = `brightness(${intensity / 10})`
+    lightSwitch.style.filter = `drop-shadow(${0} ${0} ${intensity}px #ffd600)`;
+    
+    
+})
+
 
 

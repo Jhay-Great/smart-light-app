@@ -197,11 +197,16 @@ h1 span:first-child {
 } */
 .slider {
     width: 200px;
-    height: 10px;
+    height: fit-content;
+    /* height: 10px; */
 
-    border: none;
+    /* border: none;
     border-radius: 10px;
-    background: linear-gradient(45deg, black 50%, white 45%);
+    background: linear-gradient(45deg, black 50%, white 45%); */
+}
+.slider input {
+    width: 100%;
+    height: 100%;
 }
 .basic_settings {
     width: min(300px, 100%);
