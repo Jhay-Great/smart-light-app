@@ -9,7 +9,6 @@ const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons'
 class Light {
     constructor() {
         this.lightState = 'off';
-
     }
 
     renderHTML (element, position, container) {

@@ -8,7 +8,27 @@ const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons'
 // imports
 import Light from './js/basicSettings.js';
 
+// object creation
 const lightController = new Light();
+
+// helper functions
+// const gridLightButtonFunctionality = function(lightButton, notificationMessage) {
+    
+//     let dataElement = lightButton.dataset.lighton;
+//     let temp;
+//     const roomName = lightButton.closest('.rooms').querySelector('p').textContent;
+    
+//     lightController.lightSwitch(lightButton, dataElement, temp);
+
+//             const message = `${roomName} ${notificationMessage}`;
+            
+//             lightController.displayNotification(message, 'afterend', mainRoomsContainer);
+
+//             lightController.removeNotification(document.querySelector('.notification'));
+            
+//             return;
+// }
+
 
 // Event handlers
 mainRoomsContainer.addEventListener('click', function (e) {
@@ -29,6 +49,7 @@ mainRoomsContainer.addEventListener('click', function (e) {
             lightController.removeNotification(document.querySelector('.notification'));
             
             return;
+            gridLightButtonFunctionality(lightButton, 'lights are off')
         }
         
         lightController.lightSwitch(lightButton, dataElement, temp);
@@ -38,6 +59,10 @@ mainRoomsContainer.addEventListener('click', function (e) {
         lightController.displayNotification(message, 'afterend', mainRoomsContainer);
 
         lightController.removeNotification(document.querySelector('.notification'));
+
+        return;
+
+        gridLightButtonFunctionality(lightButton, 'lights are on')
         
 
         
@@ -55,6 +80,5 @@ mainRoomsContainer.addEventListener('click', function (e) {
     }
 })
 
-// console.log(document.styleSheets[0])
-// console.log(document.styleSheets[0].cssRules[28].style)
+
 
