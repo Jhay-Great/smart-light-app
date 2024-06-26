@@ -17,7 +17,6 @@ class Light {
     }
 
     notification (message) {
-        console.log('called');
         return `
             <div class="notification">
                 <p>${message}</p>
@@ -27,10 +26,7 @@ class Light {
     }
 
     displayNotification (message, position, container) {
-        // const notify = setTimeout(this.notification(message), 5000);
-        // clearTimeout(notify);
         const html = this.notification(message);
-
         this.renderHTML(html, position, container);
     }
 
@@ -38,6 +34,12 @@ class Light {
         setTimeout(() => {
             element.remove();
         }, 6000);
+    }
+
+    lightSwitch (lightButton, dataElement, temp) {
+        temp = lightButton.attributes[0].textContent;
+        lightButton.setAttribute('src', dataElement);
+        lightButton.setAttribute('data-lightOn', temp);
     }
 
 }

@@ -20,40 +20,25 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
 
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
-            temp = e.target.attributes[0].textContent;
-            lightButton.setAttribute('src', dataElement);
-            lightButton.setAttribute('data-lightOn', temp);
+            lightController.lightSwitch(lightButton, dataElement, temp);
 
             const message = `${roomName} lights are off`;
-
-            // lightController.renderHTML(lightController.notification(`${roomName} lights are on`), 'afterend', mainRoomsContainer)
-
+            
             lightController.displayNotification(message, 'afterend', mainRoomsContainer);
 
             lightController.removeNotification(document.querySelector('.notification'));
             
             return;
         }
-
-        temp = e.target.attributes[0].textContent;
-        lightButton.setAttribute('src', dataElement);
-        lightButton.setAttribute('data-lightOn', temp);
-
+        
+        lightController.lightSwitch(lightButton, dataElement, temp);
 
         const message = `${roomName} lights are on`;
-
-        // const message = lightController.notification(`${roomName} lights are on`);
-
-        // lightController.renderHTML(message, 'afterend', mainRoomsContainer)
-
+        
         lightController.displayNotification(message, 'afterend', mainRoomsContainer);
 
         lightController.removeNotification(document.querySelector('.notification'));
         
-        // setTimeout(() => {
-        //     document.querySelector('.notification').remove();
-        // }, 6000);
-
 
         
 
