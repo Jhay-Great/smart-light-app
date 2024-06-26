@@ -37,11 +37,14 @@ mainRoomsContainer.addEventListener('click', function (e) {
         // let dataElement = lightButton.dataset.lighton;
         // let temp;
         // const roomName = lightButton.closest('.rooms').querySelector('p').textContent;
-
-
+        
+        console.log('initially off: ', lightController.isLightOff);
+        
+        
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
+            lightController.isLightOff = true;
             // lightController.lightSwitch(lightButton, dataElement, temp);
-
+            
             // const message = `${roomName} lights are off`;
             
             // lightController.displayNotification(message, 'afterend', mainRoomsContainer);
@@ -49,6 +52,7 @@ mainRoomsContainer.addEventListener('click', function (e) {
             // lightController.removeNotification(document.querySelector('.notification'));
             
             // return;
+            lightButton.style.filter = `drop-shadow(0 0 0)`;
             gridLightButtonFunctionality(lightButton, 'lights are off')
             return;
         }
@@ -61,11 +65,12 @@ mainRoomsContainer.addEventListener('click', function (e) {
         // lightController.displayNotification(message, 'afterend', mainRoomsContainer);
 
         // lightController.removeNotification(document.querySelector('.notification'));
-
+        
         // return;
-
+        
+        lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
+        lightController.isLightOff = false;
         gridLightButtonFunctionality(lightButton, 'lights are on');
-        console.log('something');
         return;
         
 
@@ -91,6 +96,7 @@ mainRoomsContainer.addEventListener('change', function(e) {
     const lightSwitch = slider.closest('.basic_settings').querySelector('.basic_settings_buttons button:first-child img');
 
     const intensity = slider.value;
+    lightController.lightIntensity = slider.value;
 
     /** TODO: NOTE: 
      * when slider is moved
@@ -110,10 +116,12 @@ mainRoomsContainer.addEventListener('change', function(e) {
 
     if (intensity >= 1) {
         lightSwitch.setAttribute('src', "./assets/svgs/light_bulb.svg")
-        lightSwitch.setAttribute('data-lightOn', "./assets/svgs/light_bulb_off.svg") 
+        lightSwitch.setAttribute('data-lightOn', "./assets/svgs/light_bulb_off.svg")
+        lightController.isLightOff = false; 
     } else {
         lightSwitch.setAttribute('src', "./assets/svgs/light_bulb_off.svg")
         lightSwitch.setAttribute('data-lightOn', "./assets/svgs/light_bulb.svg") 
+        lightController.isLightOff = true;
     }
     
     // gridLightButtonFunctionality(lightSwitch, `light intensity at ${intensity}`)
