@@ -12,57 +12,61 @@ import Light from './js/basicSettings.js';
 const lightController = new Light();
 
 // helper functions
-// const gridLightButtonFunctionality = function(lightButton, notificationMessage) {
+const gridLightButtonFunctionality = function(lightButton, notificationMessage) {
     
-//     let dataElement = lightButton.dataset.lighton;
-//     let temp;
-//     const roomName = lightButton.closest('.rooms').querySelector('p').textContent;
+    let dataElement = lightButton.dataset.lighton;
+    let temp;
+    const roomName = lightButton.closest('.rooms').querySelector('p').textContent;
     
-//     lightController.lightSwitch(lightButton, dataElement, temp);
+    lightController.lightSwitch(lightButton, dataElement, temp);
 
-//             const message = `${roomName} ${notificationMessage}`;
-            
-//             lightController.displayNotification(message, 'afterend', mainRoomsContainer);
-
-//             lightController.removeNotification(document.querySelector('.notification'));
-            
-//             return;
-// }
-
-
-// Event handlers
-mainRoomsContainer.addEventListener('click', function (e) {
-    if (e.target.closest('.basic_settings_buttons > button:first-child')) {
-        const lightButton = e.target;
-        let dataElement = lightButton.dataset.lighton;
-        let temp;
-        const roomName = lightButton.closest('.rooms').querySelector('p').textContent;
-
-
-        if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
-            lightController.lightSwitch(lightButton, dataElement, temp);
-
-            const message = `${roomName} lights are off`;
+            const message = `${roomName} ${notificationMessage}`;
             
             lightController.displayNotification(message, 'afterend', mainRoomsContainer);
 
             lightController.removeNotification(document.querySelector('.notification'));
             
             return;
+}
+
+
+// Event handlers
+mainRoomsContainer.addEventListener('click', function (e) {
+    if (e.target.closest('.basic_settings_buttons > button:first-child')) {
+        const lightButton = e.target;
+        // let dataElement = lightButton.dataset.lighton;
+        // let temp;
+        // const roomName = lightButton.closest('.rooms').querySelector('p').textContent;
+
+
+        if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
+            // lightController.lightSwitch(lightButton, dataElement, temp);
+
+            // const message = `${roomName} lights are off`;
+            
+            // lightController.displayNotification(message, 'afterend', mainRoomsContainer);
+
+            // lightController.removeNotification(document.querySelector('.notification'));
+            
+            // return;
             gridLightButtonFunctionality(lightButton, 'lights are off')
+            return;
         }
         
-        lightController.lightSwitch(lightButton, dataElement, temp);
+        // lightController.lightSwitch(lightButton, dataElement, temp);
 
-        const message = `${roomName} lights are on`;
+
+        // const message = `${roomName} lights are on`;
         
-        lightController.displayNotification(message, 'afterend', mainRoomsContainer);
+        // lightController.displayNotification(message, 'afterend', mainRoomsContainer);
 
-        lightController.removeNotification(document.querySelector('.notification'));
+        // lightController.removeNotification(document.querySelector('.notification'));
 
+        // return;
+
+        gridLightButtonFunctionality(lightButton, 'lights are on');
+        console.log('something');
         return;
-
-        gridLightButtonFunctionality(lightButton, 'lights are on')
         
 
         
@@ -88,17 +92,39 @@ mainRoomsContainer.addEventListener('change', function(e) {
 
     const intensity = slider.value;
 
-    /**when slider is moved
+    /** TODO: NOTE: 
+     * when slider is moved
      * the light should be turned on
      * the slide should start from 0 by default
      * when off at an intensity of whatever and the light is put on the light should reflect the level of intensity
      */
     
     // lightSwitch.style.filter = `brightness(${intensity / 10})`
+
+    // intensity >= 1 ? 
+    // lightSwitch.setAttribute('src', "./assets/svgs/light_bulb_on.svg")
+    // lightSwitch.setAttribute('data-lightOn', "./assets/svgs/light_bulb_off.svg") :
+    // `
+    //     <img src="./assets/svgs/light_bulb_off.svg" data-lightOn="./assets/svgs/light_bulb.svg" alt="fullscreen button svg icon">
+    // `;
+
+    if (intensity >= 1) {
+        lightSwitch.setAttribute('src', "./assets/svgs/light_bulb.svg")
+        lightSwitch.setAttribute('data-lightOn', "./assets/svgs/light_bulb_off.svg") 
+    } else {
+        lightSwitch.setAttribute('src', "./assets/svgs/light_bulb_off.svg")
+        lightSwitch.setAttribute('data-lightOn', "./assets/svgs/light_bulb.svg") 
+    }
+    
+    // gridLightButtonFunctionality(lightSwitch, `light intensity at ${intensity}`)
+    
     lightSwitch.style.filter = `drop-shadow(${0} ${0} ${intensity}px #ffd600)`;
     
     
 })
+
+
+// TODO: slider should start from 0
 
 
 
