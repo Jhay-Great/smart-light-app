@@ -59,7 +59,7 @@ mainRoomsContainer.addEventListener('click', function (e) {
     if (e.target.closest('.basic_settings_buttons > button:first-child')) {
         const lightButton = e.target;
         
-        console.log('initially off: ', lightController.isLightOff);
+        // console.log('initially off: ', lightController.isLightOff);
         
         
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
@@ -75,6 +75,8 @@ mainRoomsContainer.addEventListener('click', function (e) {
         lightController.isLightOff = false;
         gridLightButtonFunctionality(lightButton, 'lights are on');
         return;
+
+        // TODO: set the initial starting of the range to 0 and when the light is turned off the range should move from 0 to 1
         
 
         
@@ -181,6 +183,8 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
 })
 
 closeButton.addEventListener('click', function() {
+    const parent = document.querySelector('.advanced_features');
+    parent.replaceChildren(parent.firstElementChild); // remove children elements expect the first child
     advancedFeaturesContainer.classList.add('hidden');
 })
 
