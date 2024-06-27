@@ -8,6 +8,18 @@ const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons'
 // advanced settings elements
 
 
+// helper variables
+const object = {
+    hall: { name: 'hall', numOfLights: 6, isLightOff: false, },
+    bedroom: { name: 'bedroom', numOfLights: 3, isLightOff: true, },
+    bathroom: { name: 'bathroom', numOfLights: 1, isLightOff: true, },
+    ['outdoor lights']: { name: 'outdoor lights', numOfLights: 6, isLightOff: true, },
+    ['guest room']: { name: 'guest room', numOfLights: 4, isLightOff: true, },
+    kitchen: { name: 'kitchen', numOfLights: 3, isLightOff: true, },
+    [['walkway & corridor']]: { name: 'walkway & corridor', numOfLights: 8, isLightOff: false, },
+}
+
+
 // imports
 import Light from './js/basicSettings.js';
 import AdvanceSettings from './js/advanceSettings.js';
@@ -21,6 +33,7 @@ const component1 = {
     isLightOff: true,
 }
 const bedroom = new AdvanceSettings(component1);
+// console.log(bedroom);
 
 // helper functions
 const gridLightButtonFunctionality = function(lightButton, notificationMessage) {
@@ -76,7 +89,27 @@ mainRoomsContainer.addEventListener('click', function (e) {
         // // console.log('r')
         // console.log(document.styleSheets[0].cssRules[28].style)
         // const currentLightOutput = document.styleSheets[0].cssRules[28].style.filter;
-    }
+    };
+
+    // expanding additional functionalities or advance settings
+    if (e.target.closest('.basic_settings_buttons > button:last-child')) {
+        e.target.closest('body').querySelector('.advanced_features_container').classList.remove('hidden');
+        const selectedComponent = e.target.closest('.rooms').querySelector('p').textContent;
+
+        // console.log(selectedComponent.toLowerCase(), object[selectedComponent.toLowerCase()])
+        
+        const selectedComponentObject = new AdvanceSettings(object[selectedComponent.toLowerCase()])
+
+        // console.log(selectedComponentObject)
+        const markup = selectedComponentObject.markup();
+
+        const container = document.querySelector('.advanced_features')
+
+        selectedComponentObject.renderHTML(markup, 'beforeend', container);
+        
+
+
+    };
 })
 
 mainRoomsContainer.addEventListener('change', function(e) {
@@ -139,7 +172,17 @@ mainRoomsContainer.addEventListener('change', function(e) {
  */
 
 // Advance settings
+const advancedFeaturesContainer = document.querySelector('.advanced_features_container');
+const closeButton = document.querySelector('.close-btn');
 
+advancedFeaturesContainer.addEventListener('click', function(e) {
+    // e.target.closest('body');
+
+})
+
+closeButton.addEventListener('click', function() {
+    advancedFeaturesContainer.classList.add('hidden');
+})
 
 
 

@@ -13,6 +13,33 @@ class AdvanceSettings extends General {
 
     }
 
+    markup () {
+        return `
+            <section class="component_summary">
+                <div>
+                    <p class"component_name">${this.name} Lights</p>
+                    <p class="number_of_lights">${this.numOfLights}</p>
+                </div>
+                <div>
+                    <p class="auto_off">
+                        <span>Automatic turn off:</span>
+                        <span>22:00</span>
+                    </p>
+                    <p class="auto_on">
+                        <span>Automatic turn on:</span>
+                        <span>06:30</span>
+                    </p>
+                </div>
+            </section>
+            <section class="customization">
+                <div class="edit">
+                    <p>Customize</p>
+                    <img src="./assets/svgs/edit.svg" alt="customize settings svg icon">
+                </div>
+            </section>
+        `
+    }
+
 
 }
 
