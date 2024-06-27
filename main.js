@@ -178,7 +178,43 @@ const advancedFeaturesContainer = document.querySelector('.advanced_features_con
 const closeButton = document.querySelector('.close-btn');
 
 advancedFeaturesContainer.addEventListener('click', function(e) {
-    // e.target.closest('body');
+    const currentElement = e.target;
+
+    if (currentElement.closest('.customization-btn')) {
+        const element = document.querySelector('.customization-details')
+        element.classList.toggle('hidden');
+ 
+        return;
+    }
+    let dynamicSelector;
+    
+    if (currentElement.textContent === 'Okay') {
+        const inputElement = currentElement.parentElement.parentElement.querySelector('input');
+        const { value } = inputElement;
+        inputElement.value = '';
+        
+        if (currentElement.classList.contains('defaultOn-okay')) {
+            let timeElement = currentElement.closest('.advanced_features').querySelector('.auto_on span:last-child');
+            timeElement.textContent = value === '' ? '06:30' : value;
+            return;
+        }
+        if (currentElement.classList.contains('defaultOff-okay')) {
+            let timeElement = currentElement.closest('.advanced_features').querySelector('.auto_off span:last-child');
+            timeElement.textContent = value === '' ? '22:00' : value;
+            return;
+        }
+
+
+        // return;
+
+        // there should be a notification popup
+    }
+    if (currentElement.textContent === 'Cancel') {
+        const inputElement = currentElement.parentElement.parentElement.querySelector('input');
+        inputElement.value = '';
+        return;
+    }
+    
 
 })
 
