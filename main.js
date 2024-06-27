@@ -15,6 +15,13 @@ import AdvanceSettings from './js/advanceSettings.js';
 // object creation
 const lightController = new Light();
 
+const component1 = {
+    name: 'bedroom',
+    numOfLights: 3,
+    isLightOff: true,
+}
+const bedroom = new AdvanceSettings(component1);
+
 // helper functions
 const gridLightButtonFunctionality = function(lightButton, notificationMessage) {
     
@@ -130,6 +137,9 @@ mainRoomsContainer.addEventListener('change', function(e) {
  * @6:00am the outside lights go off => it's morning
  * 
  */
+
+// Advance settings
+
 
 
 

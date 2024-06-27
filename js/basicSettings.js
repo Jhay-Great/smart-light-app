@@ -1,40 +1,43 @@
 'use strict'
 
-// basics settings element
-const allRooms = document.querySelectorAll('.rooms');
-const mainRoomsContainer = document.querySelector('.application_container');
-const basicSettings = document.querySelector('.basic_settings');
-const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
+import General from "./general.js";
 
-class Light {
+// basics settings element
+// const allRooms = document.querySelectorAll('.rooms');
+// const mainRoomsContainer = document.querySelector('.application_container');
+// const basicSettings = document.querySelector('.basic_settings');
+// const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
+
+class Light extends General {
     constructor() {
+        super();
         this.isLightOff = true;
         this.lightIntensity = 5;
     }
 
-    renderHTML (element, position, container) {
-        container.insertAdjacentHTML(position, element);
-    }
+    // renderHTML (element, position, container) {
+    //     container.insertAdjacentHTML(position, element);
+    // }
 
-    notification (message) {
-        return `
-            <div class="notification">
-                <p>${message}</p>
-            </div>
-        `;
+    // notification (message) {
+    //     return `
+    //         <div class="notification">
+    //             <p>${message}</p>
+    //         </div>
+    //     `;
 
-    }
+    // }
 
-    displayNotification (message, position, container) {
-        const html = this.notification(message);
-        this.renderHTML(html, position, container);
-    }
+    // displayNotification (message, position, container) {
+    //     const html = this.notification(message);
+    //     this.renderHTML(html, position, container);
+    // }
 
-    removeNotification (element) {
-        setTimeout(() => {
-            element.remove();
-        }, 6000);
-    }
+    // removeNotification (element) {
+    //     setTimeout(() => {
+    //         element.remove();
+    //     }, 6000);
+    // }
 
     lightSwitch (lightButton, dataElement, temp) {
         temp = lightButton.attributes[0].textContent;
