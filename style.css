@@ -231,6 +231,81 @@ h1 span:first-child {
     aspect-ratio: 1;
 }
 
+/* ADVANCED FEATURES */
+.advanced_features_container {
+    backdrop-filter: brightness(0.4);
+    background-color: #111a;
+    position: absolute;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.advanced_features {
+    width: min(500px, 100%);
+    height: 80dvh;
+    background: var(--white-color);
+    background: #ddd;
+    color: #111;
+
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #333;
+}
+h3 {
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 1rem 0;
+    letter-spacing: 2px;
+}
+.component_summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.component_summary > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.component_summary div > p {
+    letter-spacing: 3px;
+    font-weight: 300;
+
+}
+.component_summary div:first-child > p:last-child {
+    font-weight: 500;
+    font-size: 4rem;
+}
+.auto_off span:last-child,
+.auto_on span:last-child {
+    font-weight: 600;
+}
+
+.customization {
+    width: 100%;
+    height: fit-content;
+    padding: 2rem;
+
+}
+.edit {
+
+    display: flex;
+    justify-content: space-between;
+
+}
+.edit img {
+    width: 30px;
+    aspect-ratio: 1;
+}
+
 
 
 /* DYNAMIC ELEMENT RENDERING */
@@ -253,6 +328,10 @@ h1 span:first-child {
     border: none;
     border-radius: 5px;
 }
+
+
+
+
 
 
 

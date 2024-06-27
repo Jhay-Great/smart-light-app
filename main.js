@@ -5,8 +5,12 @@ const mainRoomsContainer = document.querySelector('.application_container');
 const basicSettings = document.querySelector('.basic_settings');
 const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
 
+// advanced settings elements
+
+
 // imports
 import Light from './js/basicSettings.js';
+import AdvanceSettings from './js/advanceSettings.js';
 
 // object creation
 const lightController = new Light();
@@ -34,39 +38,18 @@ const gridLightButtonFunctionality = function(lightButton, notificationMessage) 
 mainRoomsContainer.addEventListener('click', function (e) {
     if (e.target.closest('.basic_settings_buttons > button:first-child')) {
         const lightButton = e.target;
-        // let dataElement = lightButton.dataset.lighton;
-        // let temp;
-        // const roomName = lightButton.closest('.rooms').querySelector('p').textContent;
         
         console.log('initially off: ', lightController.isLightOff);
         
         
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
             lightController.isLightOff = true;
-            // lightController.lightSwitch(lightButton, dataElement, temp);
             
-            // const message = `${roomName} lights are off`;
-            
-            // lightController.displayNotification(message, 'afterend', mainRoomsContainer);
-
-            // lightController.removeNotification(document.querySelector('.notification'));
-            
-            // return;
             lightButton.style.filter = `drop-shadow(0 0 0)`;
             gridLightButtonFunctionality(lightButton, 'lights are off')
             return;
         }
         
-        // lightController.lightSwitch(lightButton, dataElement, temp);
-
-
-        // const message = `${roomName} lights are on`;
-        
-        // lightController.displayNotification(message, 'afterend', mainRoomsContainer);
-
-        // lightController.removeNotification(document.querySelector('.notification'));
-        
-        // return;
         
         lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
         lightController.isLightOff = false;
@@ -107,12 +90,6 @@ mainRoomsContainer.addEventListener('change', function(e) {
     
     // lightSwitch.style.filter = `brightness(${intensity / 10})`
 
-    // intensity >= 1 ? 
-    // lightSwitch.setAttribute('src', "./assets/svgs/light_bulb_on.svg")
-    // lightSwitch.setAttribute('data-lightOn', "./assets/svgs/light_bulb_off.svg") :
-    // `
-    //     <img src="./assets/svgs/light_bulb_off.svg" data-lightOn="./assets/svgs/light_bulb.svg" alt="fullscreen button svg icon">
-    // `;
 
     if (intensity >= 1) {
         lightSwitch.setAttribute('src', "./assets/svgs/light_bulb.svg")
@@ -124,7 +101,6 @@ mainRoomsContainer.addEventListener('change', function(e) {
         lightController.isLightOff = true;
     }
     
-    // gridLightButtonFunctionality(lightSwitch, `light intensity at ${intensity}`)
     
     lightSwitch.style.filter = `drop-shadow(${0} ${0} ${intensity}px #ffd600)`;
     
@@ -133,6 +109,27 @@ mainRoomsContainer.addEventListener('change', function(e) {
 
 
 // TODO: slider should start from 0
+/**
+ * get an object data
+ * TODO: research!!! does the smart light involve sockets and plugs
+ */
+
+/**default settings / customize
+ * @10:00pm the bedroom lights go off => time to sleep
+ * @6:30am the bedroom lights turn on => time to wake up
+ * {
+ *  component: bedroom,
+ *  numberOfLights: 3,
+ *  isLightOff: true,
+ *  defaultTimeOff: 10:00pm,
+ *  defaultTimeOn: 6:30am,
+ *  
+ * }
+ * 
+ * @6:00pm the outside lights turn on => it's evening
+ * @6:00am the outside lights go off => it's morning
+ * 
+ */
 
 
 
