@@ -17,7 +17,7 @@ class AdvanceSettings extends General {
         return `
             <section class="component_summary">
                 <div>
-                    <p class"component_name">${this.name} Lights</p>
+                    <p class"component_name">${this.capFirstLetter(this.name)} lights</p>
                     <p class="number_of_lights">${this.numOfLights}</p>
                 </div>
                 <div>
@@ -38,6 +38,10 @@ class AdvanceSettings extends General {
                 </div>
             </section>
         `
+    }
+
+    capFirstLetter (word) {
+        return word.replace(word.at(0), word.at(0).toUpperCase())
     }
 
 

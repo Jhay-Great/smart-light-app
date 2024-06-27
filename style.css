@@ -304,8 +304,8 @@ h3 {
 }
 .close-btn {
     position: absolute;
-    top: 0px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     
     width: 30px;
     height: 30px;
