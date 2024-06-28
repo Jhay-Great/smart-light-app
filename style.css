@@ -32,6 +32,8 @@ main {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+
+    background: #000;
 }
 
 h1 {
@@ -52,6 +54,7 @@ h1 span:first-child {
     width: min(500px, 100%);
     height: max(100px, 200px);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -64,6 +67,10 @@ h1 span:first-child {
 .entry_point img {
     width: 100px;
     aspect-ratio: 1;
+}
+.entry_point p {
+    font-size: clamp(18px, 5vw, 25px);
+    font-weight: 600;
 }
 .entry_point > :first-child,
 .entry_point:hover > :nth-child(2) {

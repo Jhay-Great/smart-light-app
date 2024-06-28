@@ -1,5 +1,7 @@
 'use script'
 // basics settings element
+const homepageButton = document.querySelector('.entry_point');
+const homepage = document.querySelector('main');
 const allRooms = document.querySelectorAll('.rooms');
 const mainRoomsContainer = document.querySelector('.application_container');
 const basicSettings = document.querySelector('.basic_settings');
@@ -26,13 +28,14 @@ import AdvanceSettings from './js/advanceSettings.js';
 
 // object creation
 const lightController = new Light();
+let advancedSettings;
 
-const component1 = {
-    name: 'bedroom',
-    numOfLights: 3,
-    isLightOff: true,
-}
-const bedroom = new AdvanceSettings(component1);
+// const component1 = {
+//     name: 'bedroom',
+//     numOfLights: 3,
+//     isLightOff: true,
+// }
+// const bedroom = new AdvanceSettings(component1);
 // console.log(bedroom);
 
 // helper functions
@@ -55,6 +58,12 @@ const gridLightButtonFunctionality = function(lightButton, notificationMessage) 
 
 
 // Event handlers
+homepageButton.addEventListener('click', function(e) {
+    mainRoomsContainer.classList.remove('hidden');
+    homepage.classList.add('hidden');
+})
+
+
 mainRoomsContainer.addEventListener('click', function (e) {
     if (e.target.closest('.basic_settings_buttons > button:first-child')) {
         const lightButton = e.target;
@@ -99,16 +108,34 @@ mainRoomsContainer.addEventListener('click', function (e) {
         const selectedComponent = e.target.closest('.rooms').querySelector('p').textContent;
 
         // console.log(selectedComponent.toLowerCase(), object[selectedComponent.toLowerCase()])
-        
-        const selectedComponentObject = new AdvanceSettings(object[selectedComponent.toLowerCase()])
 
+        // if (!advancedSettings?.name) {
+        //     console.log('not created')
+        // }
+
+        if (advancedSettings?.name !== selectedComponent ) {
+            console.log('object not created...')
+            const selectedComponentObject = new AdvanceSettings(object[selectedComponent.toLowerCase()])
+            advancedSettings = selectedComponentObject;
+    
+            console.log(selectedComponentObject, selectedComponent);
+        }
+        
+        console.log('before new object: ', advancedSettings?.autoOn);
+
+        
         // console.log(selectedComponentObject)
-        const markup = selectedComponentObject.markup();
-
-        const container = document.querySelector('.advanced_features')
-
-        selectedComponentObject.renderHTML(markup, 'beforeend', container);
+        const markup = advancedSettings.markup();
+        // const markup = selectedComponentObject.markup();
         
+        const container = document.querySelector('.advanced_features')
+        
+        advancedSettings.renderHTML(markup, 'beforeend', container);
+        // selectedComponentObject.renderHTML(markup, 'beforeend', container);
+        // console.log('logging when expand is clicked: ')
+        // console.log(advancedSettings.name, advancedSettings.autoOn)
+        
+        // console.log(advancedSettings.autoOn);
 
 
     };
@@ -178,6 +205,7 @@ const advancedFeaturesContainer = document.querySelector('.advanced_features_con
 const closeButton = document.querySelector('.close-btn');
 
 advancedFeaturesContainer.addEventListener('click', function(e) {
+    // console.log(advancedSettings);
     const currentElement = e.target;
 
     if (currentElement.closest('.customization-btn')) {
@@ -186,16 +214,22 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
  
         return;
     }
-    let dynamicSelector;
+    // let dynamicSelector;
     
     if (currentElement.textContent === 'Okay') {
         const inputElement = currentElement.parentElement.parentElement.querySelector('input');
         const { value } = inputElement;
+        if (value === '') return;
         inputElement.value = '';
         
         if (currentElement.classList.contains('defaultOn-okay')) {
             let timeElement = currentElement.closest('.advanced_features').querySelector('.auto_on span:last-child');
-            timeElement.textContent = value === '' ? '06:30' : value;
+            // timeElement.textContent = value === '' ? '06:30' : value;
+            advancedSettings.autoOn = value;
+            timeElement.textContent = advancedSettings.autoOn;
+            
+            // console.log(advancedSettings)
+            // console.log(advancedSettings.getObjectDetails())
             return;
         }
         if (currentElement.classList.contains('defaultOff-okay')) {
@@ -214,6 +248,8 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
         inputElement.value = '';
         return;
     }
+
+    // console.log('might be an early log ', advancedSettings)
     
 
 })
@@ -222,6 +258,7 @@ closeButton.addEventListener('click', function() {
     const parent = document.querySelector('.advanced_features');
     parent.replaceChildren(parent.firstElementChild); // remove children elements expect the first child
     advancedFeaturesContainer.classList.add('hidden');
+    console.log('when closed: ', advancedSettings.autoOn);
 })
 
 
