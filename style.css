@@ -37,6 +37,9 @@ main {
 }
 
 h1 {
+    /* position: relative;
+        left: -300px; */
+    
     text-align: center;
     display: flex;
     gap: 10px;
@@ -47,7 +50,9 @@ h1 {
     overflow: hidden;
 }
 h1 span:first-child {
-    animation: left_slide-in 900ms 3s ease-in-out ;
+    position: relative;
+    left: -510px;
+    animation: left_slide-in 900ms 1s ease-in-out forwards;
 }
 
 .entry_point {
@@ -71,6 +76,10 @@ h1 span:first-child {
 .entry_point p {
     font-size: clamp(18px, 5vw, 25px);
     font-weight: 600;
+    /* opacity: 0; */
+    /* animation: fadeIn 900ms 1s 2s ease-in-out forwards; */
+    /* animation: fadeIn 1s 900ms 2s ease-in forwards; */
+
 }
 .entry_point > :first-child,
 .entry_point:hover > :nth-child(2) {
@@ -362,6 +371,29 @@ h4 {
     border-radius: 4px;
 }
 
+.img_svg-container {
+    width: 30px;
+    
+}
+.wifi-container {
+    position: absolute;
+    width: fit-content;
+    padding: 0 1rem;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    background: #00a8;
+    border: none;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
 
 
 
@@ -411,8 +443,8 @@ button {
 /* ANIMATIONS */
 @keyframes left_slide-in {
     0% {
-        position: relative;
-        left: -300px;
+        /* position: relative;
+        left: -300px; */
         opacity: 0.1;
     }
     50% {
@@ -420,6 +452,14 @@ button {
     }
     100% {
         left: 0;
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
         opacity: 1;
     }
 }

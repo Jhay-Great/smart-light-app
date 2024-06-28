@@ -145,6 +145,14 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
 
     };
+    
+    if (e.target.closest('.img_svg-container')) {
+        let parent = e.target.closest('.img_svg-container');
+        const element = parent.previousElementSibling;
+
+        element.classList.toggle('hidden');
+        
+    }
 })
 
 mainRoomsContainer.addEventListener('change', function(e) {
