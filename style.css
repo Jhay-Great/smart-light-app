@@ -494,9 +494,12 @@ button {
     }
   }
 
-/* SPECIAL CLASSES */
+/* SPECIAL CLASSES / PSEUDO CLASSES*/
 .hidden {
     display: none;
+}
+.wifi-active {
+    background: #00a;
 }
 
 @media screen and (max-width: 780px) {

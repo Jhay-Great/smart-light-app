@@ -146,11 +146,13 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
     };
     
+    // handing wifi
     if (e.target.closest('.img_svg-container')) {
         let parent = e.target.closest('.img_svg-container');
         const element = parent.previousElementSibling;
 
         element.classList.toggle('hidden');
+        element.classList.contains('hidden') ? element.parentElement.classList.remove('wifi-active') : element.parentElement.classList.add('wifi-active');
         
     }
 })
