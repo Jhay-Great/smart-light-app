@@ -393,6 +393,9 @@ h4 {
     align-items: center;
     gap: 20px;
 }
+.wifi-container:hover p {
+    display: block;
+}
 
 
 
