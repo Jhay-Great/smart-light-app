@@ -7,6 +7,8 @@ const mainRoomsContainer = document.querySelector('.application_container');
 const basicSettings = document.querySelector('.basic_settings');
 const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
 
+const loader = document.querySelector('.loader-container')
+
 // advanced settings elements
 
 
@@ -59,8 +61,12 @@ const gridLightButtonFunctionality = function(lightButton, notificationMessage) 
 
 // Event handlers
 homepageButton.addEventListener('click', function(e) {
-    mainRoomsContainer.classList.remove('hidden');
     homepage.classList.add('hidden');
+    loader.classList.remove('hidden')
+    
+    setTimeout(() => {
+        mainRoomsContainer.classList.remove('hidden');
+    }, 5000);
 })
 
 

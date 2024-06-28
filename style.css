@@ -424,7 +424,43 @@ button {
     }
 }
 
+/* loading effect */
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    background-color: #000;
+  }
+  
+  .loader {
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    background-color: #009;
+    animation: spin 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  }
+  
+  @keyframes spin {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      transform: scale(0.5) rotate(180deg);
+    }
+  }
+
 /* SPECIAL CLASSES */
 .hidden {
     display: none;
+}
+
+@media screen and (max-width: 780px) {
+    .application_container {
+        overflow: scroll;
+    }
+    .flex1, .flex2, .flex3 {
+        flex-direction: column;
+    }
 }
