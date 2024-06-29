@@ -38,7 +38,19 @@ import AdvanceSettings from './js/advanceSettings.js';
 
 // object creation
 const lightController = new Light();
-let advancedSettings;
+const advancedSettings = new AdvanceSettings();
+
+// global variables
+let selectedComponent;
+
+// let search = 'age';
+// const obj = {
+//     name: 'app',
+//     age: 32
+// }
+// console.log(obj[search]);
+
+// let advancedSettings;
 
 // const component1 = {
 //     name: 'bedroom',
@@ -83,13 +95,8 @@ mainRoomsContainer.addEventListener('click', function (e) {
         const lightButton = e.target;
         const componentImg = lightButton.closest('.rooms').querySelector(':first-child');
         const slider = lightButton.closest('.basic_settings').querySelector('input');
+        
 
-        
-        
-        
-        // console.log('initially off: ', lightController.isLightOff);
-        
-        
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
             lightController.isLightOff = true;
             lightController.lightIntensity = 0
@@ -116,7 +123,11 @@ mainRoomsContainer.addEventListener('click', function (e) {
     // expanding additional functionalities or advance settings
     if (e.target.closest('.basic_settings_buttons > button:last-child')) {
         e.target.closest('body').querySelector('.advanced_features_container').classList.remove('hidden');
-        const selectedComponent = e.target.closest('.rooms').querySelector('p').textContent;
+
+        selectedComponent = e.target.closest('.rooms').querySelector('p').textContent;
+
+        // console.log(advancedSettings, selectedComponent);
+        const markup = advancedSettings.getSelectedSettings(selectedComponent);
 
         // console.log(selectedComponent.toLowerCase(), object[selectedComponent.toLowerCase()])
 
@@ -124,29 +135,30 @@ mainRoomsContainer.addEventListener('click', function (e) {
         //     console.log('not created')
         // }
 
-        if (advancedSettings?.name !== selectedComponent ) {
-            console.log('object not created...')
-            const selectedComponentObject = new AdvanceSettings(object[selectedComponent.toLowerCase()])
-            advancedSettings = selectedComponentObject;
+        // if (advancedSettings?.name !== selectedComponent ) {
+        //     console.log('object not created...')
+        //     const selectedComponentObject = new AdvanceSettings(object[selectedComponent.toLowerCase()])
+        //     advancedSettings = selectedComponentObject;
     
-            console.log(selectedComponentObject, selectedComponent);
-        }
+        //     console.log(selectedComponentObject, selectedComponent);
+        // }
         
-        console.log('before new object: ', advancedSettings?.autoOn);
+        // console.log('before new object: ', advancedSettings?.autoOn);
 
         
         // console.log(selectedComponentObject)
-        const markup = advancedSettings.markup();
-        // const markup = selectedComponentObject.markup();
+        // const markup = advancedSettings.markup();
+        // console.log(markup);
+        // // const markup = selectedComponentObject.markup();
         
         const container = document.querySelector('.advanced_features')
         
         advancedSettings.renderHTML(markup, 'beforeend', container);
-        // selectedComponentObject.renderHTML(markup, 'beforeend', container);
-        // console.log('logging when expand is clicked: ')
-        // console.log(advancedSettings.name, advancedSettings.autoOn)
+        // // selectedComponentObject.renderHTML(markup, 'beforeend', container);
+        // // console.log('logging when expand is clicked: ')
+        // // console.log(advancedSettings.name, advancedSettings.autoOn)
         
-        // console.log(advancedSettings.autoOn);
+        // // console.log(advancedSettings.autoOn);
 
 
     };
@@ -195,6 +207,7 @@ mainRoomsContainer.addEventListener('click', function (e) {
     }
 })
 
+// when the slider is moved
 mainRoomsContainer.addEventListener('change', function(e) {
     if (!e.target.closest('.slider')) return;
     
@@ -204,12 +217,6 @@ mainRoomsContainer.addEventListener('change', function(e) {
 
     const intensity = slider.value;
     lightController.lightIntensity = slider.value;
-
-    /** TODO: NOTE: 
-     * the slide should start from 0 by default
-     */
-    
-    // lightSwitch.style.filter = `brightness(${intensity / 10})`
 
 
     if (intensity >= 1) {
@@ -228,13 +235,6 @@ mainRoomsContainer.addEventListener('change', function(e) {
     
     
 })
-
-
-// TODO: slider should start from 0
-/**
- * get an object data
- * TODO: research!!! does the smart light involve sockets and plugs
- */
 
 /**default settings / customize
  * @10:00pm the bedroom lights go off => time to sleep
@@ -311,7 +311,7 @@ closeButton.addEventListener('click', function() {
     const parent = document.querySelector('.advanced_features');
     parent.replaceChildren(parent.firstElementChild); // remove children elements expect the first child
     advancedFeaturesContainer.classList.add('hidden');
-    console.log('when closed: ', advancedSettings.autoOn);
+    // console.log('when closed: ', advancedSettings.autoOn);
 })
 
 

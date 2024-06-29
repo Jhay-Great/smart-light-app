@@ -477,6 +477,7 @@ button {
     bottom: 40px;
     right: 40px;
 
+    box-shadow: 2px 2px 5px 1px var(--white-color);
     background-color: var(--white-color);
 }
 .notification :first-child {

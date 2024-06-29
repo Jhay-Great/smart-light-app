@@ -11,8 +11,8 @@ import General from "./general.js";
 class Light extends General {
     constructor() {
         super();
-        this.isLightOff = true;
-        this.lightIntensity = 5;
+        // this.isLightOff = true;
+        // this.lightIntensity = 5;
     }
 
     renderHTML (element, position, container) {

@@ -3,32 +3,30 @@
 import General from "./general.js";
 
 class AdvanceSettings extends General {
-    constructor ({name, numOfLights=1, isLightOff=true, autoOn='06:30', autoOff='22:00'}) {
+    constructor () {
         super();
-        this.name = name;
-        this.numOfLights = numOfLights;
-        this.isLightOff = isLightOff;
-        this.autoOn = autoOn;
-        this.autoOff = autoOff;
+        // this.autoOn = '06:30';
+        // this.autoOff = '22:00';
 
     }
 
-    markup () {
+    markup (component) {
+        const {name, numOfLights, autoOn, autoOff} = component;
         return `
             <section class="component_summary">
                 <div>
-                    <p class"component_name">${this.capFirstLetter(this.name)} lights</p>
-                    <p class="number_of_lights">${this.numOfLights}</p>
+                    <p class"component_name">${this.capFirstLetter(name)} lights</p>
+                    <p class="number_of_lights">${numOfLights}</p>
                 </div>
                 <div>
 
                     <p class="auto_on">
                         <span>Automatic turn on:</span>
-                        <span>${this.autoOn}</span>
+                        <span>${autoOn}</span>
                     </p>
                     <p class="auto_off">
                         <span>Automatic turn off:</span>
-                        <span>${this.autoOff}</span>
+                        <span>${autoOff}</span>
                     </p>
                 </div>
             </section>
@@ -63,6 +61,12 @@ class AdvanceSettings extends General {
                 </section>
             </section>
         `
+    }
+
+    getSelectedSettings (componentName) {
+        const component = this.componentsData[componentName.toLowerCase()];
+        return this.markup(component);
+
     }
 
     capFirstLetter (word) {
