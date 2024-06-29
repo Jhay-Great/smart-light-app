@@ -22,6 +22,9 @@ class Light extends General {
     notification (message) {
         return `
             <div class="notification">
+                <div>
+                    <img src="./assets/svgs/checked.svg" alt="checked svg icon on notifications" >
+                </div>
                 <p>${message}</p>
             </div>
         `;
@@ -36,7 +39,7 @@ class Light extends General {
     removeNotification (element) {
         setTimeout(() => {
             element.remove();
-        }, 6000);
+        }, 20000);
     }
 
     lightSwitch (lightButton, dataElement, temp) {
