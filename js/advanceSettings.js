@@ -69,6 +69,11 @@ class AdvanceSettings extends General {
 
     }
 
+    setNewData (component, key, data) {
+        const selectedComponent = this.componentsData[component.toLowerCase()];
+        return selectedComponent[key] = data;
+    }
+
     capFirstLetter (word) {
         return word.replace(word.at(0), word.at(0).toUpperCase())
     }

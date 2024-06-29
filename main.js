@@ -43,22 +43,6 @@ const advancedSettings = new AdvanceSettings();
 // global variables
 let selectedComponent;
 
-// let search = 'age';
-// const obj = {
-//     name: 'app',
-//     age: 32
-// }
-// console.log(obj[search]);
-
-// let advancedSettings;
-
-// const component1 = {
-//     name: 'bedroom',
-//     numOfLights: 3,
-//     isLightOff: true,
-// }
-// const bedroom = new AdvanceSettings(component1);
-// console.log(bedroom);
 
 // helper functions
 const gridLightButtonFunctionality = function(lightButton, notificationMessage) {
@@ -129,37 +113,11 @@ mainRoomsContainer.addEventListener('click', function (e) {
         // console.log(advancedSettings, selectedComponent);
         const markup = advancedSettings.getSelectedSettings(selectedComponent);
 
-        // console.log(selectedComponent.toLowerCase(), object[selectedComponent.toLowerCase()])
-
-        // if (!advancedSettings?.name) {
-        //     console.log('not created')
-        // }
-
-        // if (advancedSettings?.name !== selectedComponent ) {
-        //     console.log('object not created...')
-        //     const selectedComponentObject = new AdvanceSettings(object[selectedComponent.toLowerCase()])
-        //     advancedSettings = selectedComponentObject;
-    
-        //     console.log(selectedComponentObject, selectedComponent);
-        // }
-        
-        // console.log('before new object: ', advancedSettings?.autoOn);
-
-        
-        // console.log(selectedComponentObject)
-        // const markup = advancedSettings.markup();
-        // console.log(markup);
-        // // const markup = selectedComponentObject.markup();
         
         const container = document.querySelector('.advanced_features')
         
         advancedSettings.renderHTML(markup, 'beforeend', container);
-        // // selectedComponentObject.renderHTML(markup, 'beforeend', container);
-        // // console.log('logging when expand is clicked: ')
-        // // console.log(advancedSettings.name, advancedSettings.autoOn)
         
-        // // console.log(advancedSettings.autoOn);
-
 
     };
     
@@ -277,17 +235,17 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
         
         if (currentElement.classList.contains('defaultOn-okay')) {
             let timeElement = currentElement.closest('.advanced_features').querySelector('.auto_on span:last-child');
-            // timeElement.textContent = value === '' ? '06:30' : value;
-            advancedSettings.autoOn = value;
-            timeElement.textContent = advancedSettings.autoOn;
+
+            const updatedTime = advancedSettings.setNewData(selectedComponent, 'autoOn', value)
             
-            // console.log(advancedSettings)
-            // console.log(advancedSettings.getObjectDetails())
+            timeElement.textContent = updatedTime;
             return;
         }
         if (currentElement.classList.contains('defaultOff-okay')) {
             let timeElement = currentElement.closest('.advanced_features').querySelector('.auto_off span:last-child');
-            timeElement.textContent = value === '' ? '22:00' : value;
+
+            const updatedTime = advancedSettings.setNewData(selectedComponent, 'autoOff', value)
+            timeElement.textContent = updatedTime;
             return;
         }
 
