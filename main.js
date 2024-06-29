@@ -6,6 +6,7 @@ const allRooms = document.querySelectorAll('.rooms');
 const mainRoomsContainer = document.querySelector('.application_container');
 const basicSettings = document.querySelector('.basic_settings');
 const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
+const mainWifiContainer = document.querySelector('.wifi-container');
 
 const loader = document.querySelector('.loader-container')
 
@@ -22,6 +23,13 @@ const object = {
     kitchen: { name: 'kitchen', numOfLights: 3, isLightOff: true, },
     [['walkway & corridor']]: { name: 'walkway & corridor', numOfLights: 8, isLightOff: false, },
 }
+
+const wifiConnection = [
+    {id: 0, wifiName: 'Vodafone Service Network', signal: 'excellent'},
+    {id: 1, wifiName: 'Kojo_kwame121', signal: 'poor'},
+    {id: 2, wifiName: 'spicyalice', signal: 'fair'},
+    {id: 3, wifiName: 'virus', signal: 'good'},
+]
 
 
 // imports
@@ -73,39 +81,36 @@ homepageButton.addEventListener('click', function(e) {
 mainRoomsContainer.addEventListener('click', function (e) {
     if (e.target.closest('.basic_settings_buttons > button:first-child')) {
         const lightButton = e.target;
+        const componentImg = lightButton.closest('.rooms').querySelector(':first-child');
+        const slider = lightButton.closest('.basic_settings').querySelector('input');
+
+        
+        
         
         // console.log('initially off: ', lightController.isLightOff);
         
         
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
             lightController.isLightOff = true;
+            lightController.lightIntensity = 0
+            
+            slider.value = lightController.lightIntensity;
             
             lightButton.style.filter = `drop-shadow(0 0 0)`;
+            componentImg.style.filter = `brightness(0)`;
             gridLightButtonFunctionality(lightButton, 'lights are off')
             return;
         }
         
+        lightController.lightIntensity = 5;
+        slider.value = lightController.lightIntensity;
         
         lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
+        componentImg.style.filter = `brightness(${lightController.lightIntensity / 10})`;
         lightController.isLightOff = false;
         gridLightButtonFunctionality(lightButton, 'lights are on');
         return;
 
-        // TODO: set the initial starting of the range to 0 and when the light is turned off the range should move from 0 to 1
-        
-
-        
-
-        
-        // const parentElement = e.target.closest('.rooms');
-        // // parentElement.style.filter = `brightness${(0.9)}`;
-
-        // // parentElement.style.opacity = 0.1;
-        // // document.styleSheets[0].cssRules[28].style.setProperty('filter', `brightness${0.9}`)
-        // console.log(document.styleSheets[0].cssRules[28].style.setProperty('filter', 'brightness(0.9)'))
-        // // console.log('r')
-        // console.log(document.styleSheets[0].cssRules[28].style)
-        // const currentLightOutput = document.styleSheets[0].cssRules[28].style.filter;
     };
 
     // expanding additional functionalities or advance settings
@@ -148,11 +153,44 @@ mainRoomsContainer.addEventListener('click', function (e) {
     
     // handing wifi
     if (e.target.closest('.img_svg-container')) {
-        let parent = e.target.closest('.img_svg-container');
-        const element = parent.previousElementSibling;
+        let wifiParentContainer = e.target.closest('.wifi-container');
+        let wifiStatusMessage = wifiParentContainer.querySelector('.wifi_notification p');
+        const connectionListContainer = wifiParentContainer.querySelector('.wifi_connection_list_container');
 
-        element.classList.toggle('hidden');
-        element.classList.contains('hidden') ? element.parentElement.classList.remove('wifi-active') : element.parentElement.classList.add('wifi-active');
+        // toggling wifi status message - when on/off
+        wifiStatusMessage.classList.toggle('hidden');
+
+        if (wifiStatusMessage.classList.contains('hidden')) {
+            const wifiLists = (wifiStatusMessage.closest('.wifi-container').querySelector('.wifi_connection_list_container').children);
+
+            [...wifiLists].forEach(list => {
+                list.remove();
+            })
+
+            wifiStatusMessage.parentElement.classList.remove('wifi-active');
+            connectionListContainer.classList.add('hidden');
+
+            
+        } else {
+                wifiConnection.forEach(connection => {
+                    const availableWifiConnectionMarkup = 
+                    `
+                        <div class="wifi_connections_list">
+                            <p>${connection.wifiName}</p>
+                            <span>${connection.signal}</p>
+                        </div>
+                    `;
+
+                    lightController.renderHTML(availableWifiConnectionMarkup, 'afterbegin', wifiStatusMessage.parentElement.previousElementSibling)
+                
+                
+            })
+            wifiStatusMessage.parentElement.classList.add('wifi-active');
+            connectionListContainer.classList.remove('hidden');
+
+        }
+        
+
         
     }
 })
@@ -161,16 +199,14 @@ mainRoomsContainer.addEventListener('change', function(e) {
     if (!e.target.closest('.slider')) return;
     
     const slider = e.target;
+    const componentImg = slider.closest('.rooms').querySelector(':first-child');
     const lightSwitch = slider.closest('.basic_settings').querySelector('.basic_settings_buttons button:first-child img');
 
     const intensity = slider.value;
     lightController.lightIntensity = slider.value;
 
     /** TODO: NOTE: 
-     * when slider is moved
-     * the light should be turned on
      * the slide should start from 0 by default
-     * when off at an intensity of whatever and the light is put on the light should reflect the level of intensity
      */
     
     // lightSwitch.style.filter = `brightness(${intensity / 10})`
@@ -188,6 +224,7 @@ mainRoomsContainer.addEventListener('change', function(e) {
     
     
     lightSwitch.style.filter = `drop-shadow(${0} ${0} ${intensity}px #ffd600)`;
+    componentImg.style.filter = `brightness(${intensity / 10})`;
     
     
 })

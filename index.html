@@ -25,7 +25,7 @@
      <section class="application_container hidden">
         <div class="flex1">
             <div class="rooms main_hall">
-                <!-- <img src="./assets/imgs/hall.jpg" alt="image of a hall"> -->
+                <img src="./assets/imgs/hall.jpg" alt="image of a hall">
                 <p>Hall</p>
                 <div class="basic_settings">
                     <section class="slider">
@@ -44,10 +44,11 @@
                 </div>
             </div>
             <div class="rooms bedroom">
+                <img src="./assets/imgs/bedroom.jpg" alt="image of a bedroom">
                 <p>bedroom</p>
                 <div class="basic_settings">
                     <section class="slider">
-                        <input type="range" name="light intensity" id="light_intensity" min="0" max="10">
+                        <input type="range" name="light intensity" id="light_intensity" value="0" min="0" max="10">
                     </section>
                     <section class="basic_settings_buttons">
                         <button>
@@ -62,10 +63,11 @@
                 </div>
             </div>
             <div class="rooms bathroom">
+                <img src="./assets/imgs/bathroom.jpg" alt="image of a bathroom">
                 <p>bathroom</p>
                 <div class="basic_settings">
                     <section class="slider">
-                        <input type="range" name="light intensity" id="light_intensity" min="0" max="10">
+                        <input type="range" name="light intensity" id="light_intensity" value="0" min="0" max="10">
                     </section>
                     <section class="basic_settings_buttons">
                         <button>
@@ -83,10 +85,11 @@
         </div>
         <div class="flex2">
             <div class="rooms outside_lights">
+                <img src="./assets/imgs/outside.jpg" alt="image of a outside_lights">
                 <p>Outdoor lights</p>
                 <div class="basic_settings">
                     <section class="slider">
-                        <input type="range" name="light intensity" id="light_intensity" min="0" max="10">
+                        <input type="range" name="light intensity" id="light_intensity" value="0" min="0" max="10">
                     </section>
                     <section class="basic_settings_buttons">
                         <button>
@@ -101,10 +104,11 @@
                 </div>
             </div>
             <div class="rooms guest_room">
+                <img src="./assets/imgs/guest_room.jpg" alt="image of a guest_room">
                 <p>guest room</p>
                 <div class="basic_settings">
                     <section class="slider">
-                        <input type="range" name="light intensity" id="light_intensity" min="0" max="10">
+                        <input type="range" name="light intensity" id="light_intensity" value="0" min="0" max="10">
                     </section>
                     <section class="basic_settings_buttons">
                         <button>
@@ -119,10 +123,11 @@
                 </div>
             </div>
             <div class="rooms kitchen">
+                <img src="./assets/imgs/kitchen.jpg" alt="image of a kitchen">
                 <p>kitchen</p>
                 <div class="basic_settings">
                     <section class="slider">
-                        <input type="range" name="light intensity" id="light_intensity" min="0" max="10">
+                        <input type="range" name="light intensity" id="light_intensity" value="0" min="0" max="10">
                     </section>
                     <section class="basic_settings_buttons">
                         <button>
@@ -140,10 +145,11 @@
         </div>
         <div class="flex3">
             <div class="rooms corridor">
+                <img src="./assets/imgs/walkway.jpg" alt="image of a corridor">
                 <p>walkway & corridor</p>
                 <div class="basic_settings">
                     <section class="slider">
-                        <input type="range" name="light intensity" id="light_intensity" min="0" max="10">
+                        <input type="range" name="light intensity" id="light_intensity" value="0" min="0" max="10">
                     </section>
                     <section class="basic_settings_buttons">
                         <button>
@@ -162,10 +168,14 @@
 
              <!-- wifi -->
       <div class="wifi-container ">
-        <p class="hidden">Wifi is currently not available</p>
-        <div class="img_svg-container">
-            <img src="./assets/svgs/wifi-disconnected.svg" alt="disconnected wifi svg logo" data-altWifiImg="./assets/svgs/wifi.svg">
-        </div>
+        <section class="wifi_connection_list_container hidden">
+        </section>
+        <section class="wifi_notification">
+            <p class="hidden">Wifi is currently not available</p>
+            <div class="img_svg-container">
+                <img src="./assets/svgs/wifi-disconnected.svg" alt="disconnected wifi svg logo" data-altWifiImg="./assets/svgs/wifi.svg">
+            </div>
+        </section>
       </div>
         
      </section>
