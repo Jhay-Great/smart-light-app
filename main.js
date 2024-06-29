@@ -14,16 +14,6 @@ const loader = document.querySelector('.loader-container')
 
 
 // helper variables
-const object = {
-    hall: { name: 'hall', numOfLights: 6, isLightOff: false, },
-    bedroom: { name: 'bedroom', numOfLights: 3, isLightOff: true, },
-    bathroom: { name: 'bathroom', numOfLights: 1, isLightOff: true, },
-    ['outdoor lights']: { name: 'outdoor lights', numOfLights: 6, isLightOff: true, },
-    ['guest room']: { name: 'guest room', numOfLights: 4, isLightOff: true, },
-    kitchen: { name: 'kitchen', numOfLights: 3, isLightOff: true, },
-    [['walkway & corridor']]: { name: 'walkway & corridor', numOfLights: 8, isLightOff: false, },
-}
-
 const wifiConnection = [
     {id: 0, wifiName: 'Vodafone Service Network', signal: 'excellent'},
     {id: 1, wifiName: 'Kojo_kwame121', signal: 'poor'},
@@ -70,7 +60,7 @@ homepageButton.addEventListener('click', function(e) {
     
     setTimeout(() => {
         mainRoomsContainer.classList.remove('hidden');
-    }, 5000);
+    }, 6000);
 })
 
 
@@ -271,6 +261,93 @@ closeButton.addEventListener('click', function() {
     advancedFeaturesContainer.classList.add('hidden');
     // console.log('when closed: ', advancedSettings.autoOn);
 })
+
+/**
+ * a function that is waiting to execute a functionality
+ * the function waits for multiple components or data object
+ */
+
+// console.log(advancedSettings.getObjectDetails());
+// const date = new Date();
+// const hours = date.getHours();
+// const mins = date.getMinutes();
+
+// const changeToSeconds = function(time) {
+
+//     const [hours, mins] = time.split(':');
+    
+//     const hourToSeconds = +hours * 60 * 60;
+//     const minsToSeconds = +mins * 60;
+
+//     return hourToSeconds + minsToSeconds;
+// }
+
+// // console.log(changeToSeconds('01:02'))
+// // console.log(new Date('17:35'))
+
+// // console.log(new Date(Date.now()))
+
+// const getCurrentTimeInSeconds = function() {
+//     const now = Date.now();
+//     const date = new Date(now);
+//     const hours = date.getHours();
+//     const mins = date.getMinutes();
+
+//     const time = `${hours}:${mins}`;
+//     // console.log(time);
+
+//     const seconds = changeToSeconds(time)
+//     // console.log(seconds);
+
+//     return seconds;
+
+
+// }
+
+// // console.log(getCurrentTimeInSeconds())
+
+// const difference = changeToSeconds('17:31') - getCurrentTimeInSeconds();
+// const toMilliseconds = difference * 1000;
+// // console.log(difference, toMilliseconds);
+
+
+// setTimeout(() => {
+//     console.log('time up...')
+// }, toMilliseconds);
+
+
+// const timer = new Date()
+// console.log(timer);
+// const hour = timer.getHours();
+// const min = timer.getMinutes();
+
+
+function setRepeatingAlarm(time, message) {
+    function checkAndTriggerAlarm() {
+        const now = new Date();
+        if (
+            now.getHours() === time.getHours() &&
+            now.getMinutes() === time.getMinutes() 
+            
+            // &&
+            // now.getSeconds() === time.getSeconds()
+        ) {
+            console.log(message);
+        }
+    }
+
+    // Check every second
+    setInterval(checkAndTriggerAlarm, 1000);
+}
+
+// Example usage:
+const dailyAlarmTime = new Date();
+dailyAlarmTime.setHours(21); // 2 PM
+dailyAlarmTime.setMinutes(59);
+// dailyAlarmTime.setSeconds(0);
+
+setRepeatingAlarm(dailyAlarmTime, 'This is your daily alarm!');
+
 
 
 

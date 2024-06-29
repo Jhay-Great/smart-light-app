@@ -64,6 +64,7 @@ class AdvanceSettings extends General {
     }
 
     getSelectedSettings (componentName) {
+        if (!componentName) return this.componentsData;
         const component = this.componentsData[componentName.toLowerCase()];
         return this.markup(component);
 
@@ -80,6 +81,24 @@ class AdvanceSettings extends General {
 
     getObjectDetails() {
         return this;
+    }
+
+    timer (time, message) {
+        function checkAndTriggerAlarm() {
+            const now = new Date();
+            if (
+                now.getHours() === time.getHours() &&
+                now.getMinutes() === time.getMinutes() 
+                
+                // &&
+                // now.getSeconds() === time.getSeconds()
+            ) {
+                console.log(message);
+            }
+        }
+    
+        // Check every second
+        setInterval(checkAndTriggerAlarm, 1000);
     }
 
 

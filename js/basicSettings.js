@@ -39,7 +39,7 @@ class Light extends General {
     removeNotification (element) {
         setTimeout(() => {
             element.remove();
-        }, 20000);
+        }, 5000);
     }
 
     lightSwitch (lightButton, dataElement, temp) {
@@ -53,16 +53,3 @@ class Light extends General {
 
 
 export default Light;
-
-// TODO: when the button is clicked the light for a particular room should be turned on.
-/**requirements
- * the parent element should also glow up
- * the slider should be at 50% which indicates a regular or normal light intensity
- * have a variable that tracks the on/off state
- * select individual targets and listen to the event
- */
-
-// Events handlers
-
-
-// Helper function / event listeners / utility functions
