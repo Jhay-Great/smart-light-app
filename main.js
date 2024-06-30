@@ -2,11 +2,11 @@
 // basics settings element
 const homepageButton = document.querySelector('.entry_point');
 const homepage = document.querySelector('main');
-const allRooms = document.querySelectorAll('.rooms');
 const mainRoomsContainer = document.querySelector('.application_container');
-const basicSettings = document.querySelector('.basic_settings');
-const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
-const mainWifiContainer = document.querySelector('.wifi-container');
+// const basicSettings = document.querySelector('.basic_settings');
+// const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
+// const allRooms = document.querySelectorAll('.rooms');
+// const mainWifiContainer = document.querySelector('.wifi-container');
 
 const loader = document.querySelector('.loader-container')
 
@@ -32,7 +32,7 @@ const advancedSettings = new AdvanceSettings();
 
 // global variables
 let selectedComponent;
-let isWifiActive = false;
+let isWifiActive = true;
 
 
 
@@ -317,6 +317,23 @@ const timer = function (time, message) {
     
 }
 timer(formattedTime, 'hello...')
+
+// const wifiLogo = document.querySelector('.img_svg-container > img');
+// function to dynamical change image element with dataset
+const changeImg = function(element) {
+    let temp, next;
+    
+    temp = element.attributes[0].value;
+    next = element.attributes[2].value;
+
+    element.src = next;
+    element.setAttribute('data-altWifiImg', temp);
+}
+
+// changeImg(wifiLogo);
+
+
+
 
 
 
