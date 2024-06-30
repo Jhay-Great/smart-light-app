@@ -71,6 +71,17 @@ mainRoomsContainer.addEventListener('click', function (e) {
         const slider = lightButton.closest('.basic_settings').querySelector('input');
         
 
+        // if (!lightController.isLightOff) {
+        //     lightController.isLightOff = true;
+        //     lightController.lightIntensity = 0
+            
+        //     slider.value = lightController.lightIntensity;
+            
+        //     lightButton.style.filter = `drop-shadow(0 0 0)`;
+        //     componentImg.style.filter = `brightness(0)`;
+        //     gridLightButtonFunctionality(lightButton, 'lights are off')
+        //     return;
+        // }
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
             lightController.isLightOff = true;
             lightController.lightIntensity = 0
@@ -229,6 +240,7 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
             const updatedTime = advancedSettings.setNewData(selectedComponent, 'autoOn', value)
             
             timeElement.textContent = updatedTime;
+            advancedSettings.automateLight(updatedTime);
             return;
         }
         if (currentElement.classList.contains('defaultOff-okay')) {
@@ -250,7 +262,6 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
         return;
     }
 
-    // console.log('might be an early log ', advancedSettings)
     
 
 })
@@ -259,8 +270,54 @@ closeButton.addEventListener('click', function() {
     const parent = document.querySelector('.advanced_features');
     parent.replaceChildren(parent.firstElementChild); // remove children elements expect the first child
     advancedFeaturesContainer.classList.add('hidden');
-    // console.log('when closed: ', advancedSettings.autoOn);
 })
+
+const time = (advancedSettings.componentsData.bathroom.autoOn);
+// advancedSettings.automateLight(time);
+const formattedTime = advancedSettings.formatTime(time);
+
+const timer = function (time, message) {
+    console.log(time)
+    function checkAndTriggerAlarm() {
+        const now = new Date();
+        if (
+            now.getHours() === time.getHours() &&
+            now.getMinutes() === time.getMinutes() &&
+            now.getSeconds() === time.getSeconds()
+        ) {
+            console.log(message);
+    
+            lightController.lightIntensity = 5;
+            slider.value = lightController.lightIntensity;
+            
+            lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
+            componentImg.style.filter = `brightness(${lightController.lightIntensity / 10})`;
+            lightController.isLightOff = false;
+            gridLightButtonFunctionality(lightButton, 'lights are on');
+            return;
+            // this.isLightOff = false;
+            // if (!lightController.isLightOff) {
+            // }
+        }
+    }
+    
+    // Check every second
+    setInterval(checkAndTriggerAlarm, 1000);
+    
+}
+timer(formattedTime, 'hello...')
+
+
+
+
+// console.log(advancedSettings.componentsData.bathroom.autoOn)
+// const time = advancedSettings.formatTime('9:23');
+// advancedSettings.timer(time, 'Hello welcome')
+
+/**
+ * when i set the time, the clock or setInterval function function would keep tract and call the callback fn when the time is up
+ */
+
 
 /**
  * a function that is waiting to execute a functionality
@@ -322,32 +379,50 @@ closeButton.addEventListener('click', function() {
 // const min = timer.getMinutes();
 
 
-function setRepeatingAlarm(time, message) {
-    function checkAndTriggerAlarm() {
-        const now = new Date();
-        if (
-            now.getHours() === time.getHours() &&
-            now.getMinutes() === time.getMinutes() 
+/**test function */
+// function setRepeatingAlarm(time, message) {
+//     function checkAndTriggerAlarm() {
+//         const now = new Date();
+//         if (
+//             now.getHours() === time.getHours() &&
+//             now.getMinutes() === time.getMinutes() 
             
-            // &&
-            // now.getSeconds() === time.getSeconds()
-        ) {
-            console.log(message);
-        }
-    }
+//             // &&
+//             // now.getSeconds() === time.getSeconds()
+//         ) {
+//             console.log(message);
+//         }
+//     }
 
-    // Check every second
-    setInterval(checkAndTriggerAlarm, 1000);
-}
+//     // Check every second
+//     setInterval(checkAndTriggerAlarm, 1000);
+// }
 
-// Example usage:
-const dailyAlarmTime = new Date();
-dailyAlarmTime.setHours(21); // 2 PM
-dailyAlarmTime.setMinutes(59);
-// dailyAlarmTime.setSeconds(0);
+// // Example usage:
+// const dailyAlarmTime = new Date();
+// dailyAlarmTime.setHours(21); // 2 PM
+// dailyAlarmTime.setMinutes(59);
+// // dailyAlarmTime.setSeconds(0);
 
-setRepeatingAlarm(dailyAlarmTime, 'This is your daily alarm!');
+// setRepeatingAlarm(dailyAlarmTime, 'This is your daily alarm!');
 
+
+// const formatTime = function(time) {
+//     const [hour, min] = time.split(':');
+    
+//     const dailyAlarmTime = new Date();
+//     dailyAlarmTime.setHours(hour); 
+//     dailyAlarmTime.setMinutes(min);
+//     // dailyAlarmTime.setSeconds(0);
+//     console.log(dailyAlarmTime);
+//     return dailyAlarmTime;
+// }
+// console.log(formatTime('9:10'))
+
+// const time = '11:32';
+// const timeTaken = new Date();
+// console.log(timeTaken.setHours(11))
+// console.log(timeTaken.setHours('11'))
 
 
 

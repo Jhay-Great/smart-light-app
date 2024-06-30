@@ -83,22 +83,38 @@ class AdvanceSettings extends General {
         return this;
     }
 
+    formatTime (time) {
+        const [hour, min] = time.split(':');
+        
+        const dailyAlarmTime = new Date();
+        dailyAlarmTime.setHours(hour); 
+        dailyAlarmTime.setMinutes(min);
+        dailyAlarmTime.setSeconds(0);
+        
+        return dailyAlarmTime;
+    };
+
     timer (time, message) {
         function checkAndTriggerAlarm() {
             const now = new Date();
             if (
                 now.getHours() === time.getHours() &&
-                now.getMinutes() === time.getMinutes() 
-                
-                // &&
-                // now.getSeconds() === time.getSeconds()
+                now.getMinutes() === time.getMinutes() &&
+                now.getSeconds() === time.getSeconds()
             ) {
                 console.log(message);
+                this.isLightOff = false;
             }
         }
     
         // Check every second
         setInterval(checkAndTriggerAlarm, 1000);
+    }
+
+    automateLight (time) {
+        // console.log(time);
+        const formattedTime = this.formatTime(time);
+        this.timer(formattedTime, 'logic working...');
     }
 
 
