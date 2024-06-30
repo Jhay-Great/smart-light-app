@@ -5,8 +5,6 @@ import General from "./general.js";
 class AdvanceSettings extends General {
     constructor () {
         super();
-        // this.autoOn = '06:30';
-        // this.autoOff = '22:00';
 
     }
 
@@ -69,10 +67,17 @@ class AdvanceSettings extends General {
         `
     }
 
-    getSelectedSettings (componentName) {
+    getSelectedComponent (componentName) {
         if (!componentName) return this.componentsData;
         const component = this.componentsData[componentName.toLowerCase()];
-        return this.markup(component);
+        return component;
+    }
+
+    getSelectedSettings (componentName) {
+        // if (!componentName) return this.componentsData;
+        // const component = this.componentsData[componentName.toLowerCase()];
+        // return this.markup(component);
+        return this.markup(this.getSelectedComponent(componentName));
 
     }
 
@@ -100,27 +105,33 @@ class AdvanceSettings extends General {
         return dailyAlarmTime;
     };
 
-    timer (time, message) {
-        function checkAndTriggerAlarm() {
-            const now = new Date();
-            if (
-                now.getHours() === time.getHours() &&
-                now.getMinutes() === time.getMinutes() &&
-                now.getSeconds() === time.getSeconds()
-            ) {
-                console.log(message);
-                this.isLightOff = false;
+    async timer (time, message, component) {
+        return new Promise ((resolve, reject) => {
+            const checkAndTriggerAlarm = () => {
+                const now = new Date();
+                console.log(time, now);
+                if (
+                    now.getHours() === time.getHours() &&
+                    now.getMinutes() === time.getMinutes() &&
+                    now.getSeconds() === time.getSeconds()
+                ) {
+                    console.log(message);
+                    this.isLightOff = false;
+                    this.componentsData[component].isLightOff = message;
+                    resolve (this.componentsData[component].isLightOff)
+                }
             }
-        }
-    
-        // Check every second
-        setInterval(checkAndTriggerAlarm, 1000);
+        
+            // Check every second
+            setInterval(checkAndTriggerAlarm, 1000);
+
+        })
     }
 
-    automateLight (time) {
-        // console.log(time);
+    async automateLight (time, component) {
         const formattedTime = this.formatTime(time);
-        this.timer(formattedTime, 'logic working...');
+        return await this.timer(formattedTime, true, component);
+        
     }
 
 

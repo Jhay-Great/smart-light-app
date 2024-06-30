@@ -150,7 +150,7 @@ h1 span:first-child {
     filter: brightness(0.0);
 
 }
-.main_hall {
+.main_hall, .hall {
     flex-basis: 500px;
 }
 /* .main_hall::after {
@@ -377,18 +377,15 @@ h4 {
     display: flex;
 }
 .wifi-container {
-    position: absolute;
+    position: fixed;
     width: fit-content;
     right: 20px;
     bottom: 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: flex-end;
-    background: #00a8;
-    border: none;
     border-radius: 20px;
-    overflow: hidden;
     border: 3px solid #00a3;
+    background: #00a8;
+    overflow: hidden;
+    cursor: pointer;
 
     display: flex;
     flex-direction: column;
@@ -425,7 +422,7 @@ h4 {
 .wifi_connections_list > img {
     width: 20px;
     aspect-ratio: 1;
-    
+
 }
 
 .wifi-container:hover p {

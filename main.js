@@ -78,18 +78,8 @@ mainRoomsContainer.addEventListener('click', function (e) {
         const componentImg = lightButton.closest('.rooms').querySelector(':first-child');
         const slider = lightButton.closest('.basic_settings').querySelector('input');
         
-
-        // if (!lightController.isLightOff) {
-        //     lightController.isLightOff = true;
-        //     lightController.lightIntensity = 0
-            
-        //     slider.value = lightController.lightIntensity;
-            
-        //     lightButton.style.filter = `drop-shadow(0 0 0)`;
-        //     componentImg.style.filter = `brightness(0)`;
-        //     gridLightButtonFunctionality(lightButton, 'lights are off')
-        //     return;
-        // }
+        
+        /** alternating light display */
         if (lightButton.getAttribute('src') === './assets/svgs/light_bulb.svg') {
             lightController.isLightOff = true;
             lightController.lightIntensity = 0
@@ -129,8 +119,8 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
         // getting specific component's data
         const data = advancedSettings.componentsData[selectedComponent].usage;
-        console.log(data);
         
+        // handling line graph 
         const ctx = document.getElementById('myChart');
         new Chart(ctx, {
             type: 'line',
@@ -252,7 +242,7 @@ mainRoomsContainer.addEventListener('change', function(e) {
 const advancedFeaturesContainer = document.querySelector('.advanced_features_container');
 const closeButton = document.querySelector('.close-btn');
 
-advancedFeaturesContainer.addEventListener('click', function(e) {
+advancedFeaturesContainer.addEventListener('click', async function(e) {
     // console.log(advancedSettings);
     const currentElement = e.target;
 
@@ -262,13 +252,13 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
  
         return;
     }
-    // let dynamicSelector;
     
     if (currentElement.textContent === 'Okay') {
         const inputElement = currentElement.parentElement.parentElement.querySelector('input');
         const { value } = inputElement;
         if (value === '') return;
         inputElement.value = '';
+        console.log(selectedComponent);
         
         if (currentElement.classList.contains('defaultOn-okay')) {
             let timeElement = currentElement.closest('.advanced_features').querySelector('.auto_on span:last-child');
@@ -276,7 +266,40 @@ advancedFeaturesContainer.addEventListener('click', function(e) {
             const updatedTime = advancedSettings.setNewData(selectedComponent, 'autoOn', value)
             
             timeElement.textContent = updatedTime;
-            advancedSettings.automateLight(updatedTime);
+            const response = await advancedSettings.automateLight(updatedTime, selectedComponent);
+
+            // console.log(response);
+            if (response) {
+                // console.log('hi');
+
+                // console.log(lightController);
+                const slider = document.querySelector('input[type="range"]');
+                const element = document.querySelector(`.${selectedComponent}`);
+
+                console.log(element)
+
+                // console.log(slider);
+
+                slider.value = lightController.lightIntensity;
+
+                // lightController.lightIntensity = 5;
+                // slider.value = lightController.lightIntensity;
+                
+                // lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
+                // componentImg.style.filter = `brightness(${lightController.lightIntensity / 10})`;
+                // lightController.isLightOff = false;
+                // gridLightButtonFunctionality(lightButton, 'lights are on');
+                // return;
+                
+            }
+
+            console.log(advancedSettings.automateLight(updatedTime, selectedComponent));
+
+            // advancedSettings.automateLight(updatedTime);
+
+
+            // console.log(lightController.componentsData[selectedComponent].isLightOff);
+            
             return;
         }
         if (currentElement.classList.contains('defaultOff-okay')) {
@@ -308,40 +331,43 @@ closeButton.addEventListener('click', function() {
     advancedFeaturesContainer.classList.add('hidden');
 })
 
-const time = (advancedSettings.componentsData.bathroom.autoOn);
-// advancedSettings.automateLight(time);
-const formattedTime = advancedSettings.formatTime(time);
+// const time = (advancedSettings.componentsData.bathroom.autoOn);
+// // advancedSettings.automateLight(time);
+// const formattedTime = advancedSettings.formatTime(time);
 
-const timer = function (time, message) {
-    // console.log(time)
-    function checkAndTriggerAlarm() {
-        const now = new Date();
-        if (
-            now.getHours() === time.getHours() &&
-            now.getMinutes() === time.getMinutes() &&
-            now.getSeconds() === time.getSeconds()
-        ) {
-            console.log(message);
+// const timer = function (time, message) {
+//     // console.log(time)
+//     function checkAndTriggerAlarm() {
+//         const now = new Date();
+//         // console.log(formattedTime, now);
+//         if (
+//             now.getHours() === time.getHours() &&
+//             now.getMinutes() === time.getMinutes() &&
+//             now.getSeconds() === time.getSeconds()
+//         ) {
+//             console.log(message);
+
+//             // lightController.componentsData
     
-            lightController.lightIntensity = 5;
-            slider.value = lightController.lightIntensity;
+//             lightController.lightIntensity = 5;
+//             slider.value = lightController.lightIntensity;
             
-            lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
-            componentImg.style.filter = `brightness(${lightController.lightIntensity / 10})`;
-            lightController.isLightOff = false;
-            gridLightButtonFunctionality(lightButton, 'lights are on');
-            return;
-            // this.isLightOff = false;
-            // if (!lightController.isLightOff) {
-            // }
-        }
-    }
+//             lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
+//             componentImg.style.filter = `brightness(${lightController.lightIntensity / 10})`;
+//             lightController.isLightOff = false;
+//             gridLightButtonFunctionality(lightButton, 'lights are on');
+//             return;
+//             // this.isLightOff = false;
+//             // if (!lightController.isLightOff) {
+//             // }
+//         }
+//     }
     
-    // Check every second
-    setInterval(checkAndTriggerAlarm, 1000);
+//     // Check every second
+//     setInterval(checkAndTriggerAlarm, 1000);
     
-}
-timer(formattedTime, 'hello...')
+// }
+// timer(formattedTime, 'hello...')
 
 // const wifiLogo = document.querySelector('.img_svg-container > img');
 // function to dynamical change image element with dataset
