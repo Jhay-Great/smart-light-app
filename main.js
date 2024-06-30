@@ -15,9 +15,9 @@ const loader = document.querySelector('.loader-container')
 
 // helper variables
 const wifiConnection = [
-    {id: 0, wifiName: 'Vodafone Service Network', signal: 'excellent'},
+    {id: 0, wifiName: 'Inet service', signal: 'excellent'},
     {id: 1, wifiName: 'Kojo_kwame121', signal: 'poor'},
-    {id: 2, wifiName: 'spicyalice', signal: 'fair'},
+    {id: 2, wifiName: 'spicyalice', signal: 'good'},
     {id: 3, wifiName: 'virus', signal: 'good'},
 ]
 
@@ -143,12 +143,14 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
             
         } else {
+            // rendering wifi to dom
                 wifiConnection.forEach(connection => {
                     const availableWifiConnectionMarkup = 
                     `
                         <div class="wifi_connections_list">
                             <p>${connection.wifiName}</p>
-                            <span>${connection.signal}</p>
+                            <img src="./assets/svgs/wifi_signal_${connection.signal !== 'excellent' ? (connection.signal === 'poor' ? 'poor' : 'good') : 'excellent'}.svg" alt="wifi signal svg icon">
+
                         </div>
                     `;
 
@@ -277,7 +279,7 @@ const time = (advancedSettings.componentsData.bathroom.autoOn);
 const formattedTime = advancedSettings.formatTime(time);
 
 const timer = function (time, message) {
-    console.log(time)
+    // console.log(time)
     function checkAndTriggerAlarm() {
         const now = new Date();
         if (

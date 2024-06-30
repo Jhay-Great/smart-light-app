@@ -401,7 +401,7 @@ h4 {
 
     padding: 0 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
 
@@ -416,12 +416,15 @@ h4 {
 }
 .wifi_connections_list {
     padding: .4rem 1rem;
-    font-size: 1.3rem;
-    letter-spacing: 1px;
     font-weight: 500;
 
     display: flex;
     justify-content: space-between;
+    
+}
+.wifi_connections_list > img {
+    width: 20px;
+    aspect-ratio: 1;
     
 }
 
@@ -431,9 +434,6 @@ h4 {
 .wifi_connection_list_container p:hover {
     background: #018;
     
-}
-.wifi_connections_list {
-    font-size: 1.2rem;
 }
 
 
