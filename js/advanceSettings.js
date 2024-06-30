@@ -59,6 +59,12 @@ class AdvanceSettings extends General {
 
                     </div>
                 </section>
+                <section class="summary">
+                    <h3>Summary</h3>
+                    <div class="chart-container">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </section>
             </section>
         `
     }

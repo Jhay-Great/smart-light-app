@@ -56,6 +56,7 @@ const gridLightButtonFunctionality = function(lightButton, notificationMessage) 
 
 
 // Event handlers
+// hidden homepage after button is clicked
 homepageButton.addEventListener('click', function(e) {
     homepage.classList.add('hidden');
     loader.classList.remove('hidden')
@@ -67,7 +68,7 @@ homepageButton.addEventListener('click', function(e) {
 
 
 
-
+// main app activities
 mainRoomsContainer.addEventListener('click', function (e) {
      // when wifi is off disable functionality
     if (!isWifiActive) return;
@@ -116,7 +117,7 @@ mainRoomsContainer.addEventListener('click', function (e) {
     if (e.target.closest('.basic_settings_buttons > button:last-child')) {
         e.target.closest('body').querySelector('.advanced_features_container').classList.remove('hidden');
 
-        selectedComponent = e.target.closest('.rooms').querySelector('p').textContent;
+        selectedComponent = e.target.closest('.rooms').querySelector('p').textContent.toLowerCase();
 
         // console.log(advancedSettings, selectedComponent);
         const markup = advancedSettings.getSelectedSettings(selectedComponent);
@@ -125,7 +126,31 @@ mainRoomsContainer.addEventListener('click', function (e) {
         const container = document.querySelector('.advanced_features')
         
         advancedSettings.renderHTML(markup, 'beforeend', container);
+
+        // getting specific component's data
+        const data = advancedSettings.componentsData[selectedComponent].usage;
+        console.log(data);
         
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
+              datasets: [{
+                label: 'Hours of usage',
+                // data: [12, 19, 3, 5, 2, 3, 8],
+                data: data,
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
 
     };
     
