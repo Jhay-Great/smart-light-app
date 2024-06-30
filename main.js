@@ -32,6 +32,8 @@ const advancedSettings = new AdvanceSettings();
 
 // global variables
 let selectedComponent;
+let isWifiActive = false;
+
 
 
 // helper functions
@@ -64,7 +66,12 @@ homepageButton.addEventListener('click', function(e) {
 })
 
 
+
+
 mainRoomsContainer.addEventListener('click', function (e) {
+     // when wifi is off disable functionality
+    if (!isWifiActive) return;
+
     if (e.target.closest('.basic_settings_buttons > button:first-child')) {
         const lightButton = e.target;
         const componentImg = lightButton.closest('.rooms').querySelector(':first-child');
@@ -150,7 +157,6 @@ mainRoomsContainer.addEventListener('click', function (e) {
                         <div class="wifi_connections_list">
                             <p>${connection.wifiName}</p>
                             <img src="./assets/svgs/wifi_signal_${connection.signal !== 'excellent' ? (connection.signal === 'poor' ? 'poor' : 'good') : 'excellent'}.svg" alt="wifi signal svg icon">
-
                         </div>
                     `;
 
@@ -170,6 +176,9 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
 // when the slider is moved
 mainRoomsContainer.addEventListener('change', function(e) {
+    // when wifi is off disable functionality
+    if (!isWifiActive) return;
+
     if (!e.target.closest('.slider')) return;
     
     const slider = e.target;
