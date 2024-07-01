@@ -3,6 +3,7 @@
 const homepageButton = document.querySelector('.entry_point');
 const homepage = document.querySelector('main');
 const mainRoomsContainer = document.querySelector('.application_container');
+const nav = document.querySelector('nav');
 // const basicSettings = document.querySelector('.basic_settings');
 // const basicSettingsButtons = document.querySelectorAll('.basic_settings_buttons');
 // const allRooms = document.querySelectorAll('.rooms');
@@ -64,6 +65,39 @@ homepageButton.addEventListener('click', function(e) {
     setTimeout(() => {
         mainRoomsContainer.classList.remove('hidden');
     }, 6000);
+})
+
+// handling events in the nav section
+nav.addEventListener('click', function(e) {
+    const current = e.target;
+    // toggling wifi network 
+    if (current.closest('.network-container')) {
+        const img = document.querySelector('.img_svg-container > img');
+        const statusMessage = document.querySelector('.wifi_notification > p')
+        
+        if (isWifiActive) {
+            isWifiActive = false;
+            changeImg(img);
+            const message = 'Wifi is currently off'
+            lightController.displayNotification(message, 'afterend', mainRoomsContainer);
+            lightController.removeNotification(document.querySelector('.notification'));
+            return;
+        }
+        if (!isWifiActive) {
+            isWifiActive = true;
+            changeImg(img);
+            const message = 'Wifi network now is active'
+            lightController.displayNotification(message, 'afterend', mainRoomsContainer);
+            lightController.removeNotification(document.querySelector('.notification'));
+            return;
+        }
+    }
+
+    // toggling light switch
+    if (current.closest('.general_light_switch')) {
+        console.log(current);
+    }
+    
 })
 
 
@@ -152,6 +186,11 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
         // toggling wifi status message - when on/off
         wifiStatusMessage.classList.toggle('hidden');
+        
+        if (!wifiStatusMessage.classList.contains('hidden')) {
+            const statusMessage = isWifiActive ? 'Wifi connections available' : 'Wifi is currently not available'
+            wifiStatusMessage.textContent = statusMessage;
+        }
 
         if (wifiStatusMessage.classList.contains('hidden')) {
             const wifiLists = (wifiStatusMessage.closest('.wifi-container').querySelector('.wifi_connection_list_container').children);
@@ -373,7 +412,7 @@ closeButton.addEventListener('click', function() {
 // function to dynamical change image element with dataset
 const changeImg = function(element) {
     let temp, next;
-    
+
     temp = element.attributes[0].value;
     next = element.attributes[2].value;
 
