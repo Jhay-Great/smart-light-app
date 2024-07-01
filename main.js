@@ -73,6 +73,8 @@ nav.addEventListener('click', function(e) {
     // toggling wifi network 
     if (current.closest('.network-container')) {
         const img = document.querySelector('.img_svg-container > img');
+        const statusMessage = document.querySelector('.wifi_notification > p')
+        
         if (isWifiActive) {
             isWifiActive = false;
             changeImg(img);
@@ -184,6 +186,11 @@ mainRoomsContainer.addEventListener('click', function (e) {
 
         // toggling wifi status message - when on/off
         wifiStatusMessage.classList.toggle('hidden');
+        
+        if (!wifiStatusMessage.classList.contains('hidden')) {
+            const statusMessage = isWifiActive ? 'Wifi connections available' : 'Wifi is currently not available'
+            wifiStatusMessage.textContent = statusMessage;
+        }
 
         if (wifiStatusMessage.classList.contains('hidden')) {
             const wifiLists = (wifiStatusMessage.closest('.wifi-container').querySelector('.wifi_connection_list_container').children);
