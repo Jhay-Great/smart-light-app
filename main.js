@@ -276,7 +276,7 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
                 const slider = document.querySelector('input[type="range"]');
                 const element = document.querySelector(`.${selectedComponent}`);
 
-                console.log(element)
+                // console.log(element)
 
                 // console.log(slider);
 
