@@ -446,9 +446,9 @@ h4 {
 
 }
 
-.wifi-container:hover p {
+/* .wifi-container:hover p {
     display: block;
-}
+} */
 .wifi_connection_list_container p:hover {
     background: #018;
     
@@ -477,7 +477,9 @@ button {
 /* DYNAMIC ELEMENT RENDERING */
 .notification {
     width: fit-content;
-    height: 40px;
+    max-width: 400px;
+    height: fit-content;
+    min-height: 40px;
     margin: 1rem;
     padding: 0.4rem 0.6rem;
 
