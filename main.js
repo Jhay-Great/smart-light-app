@@ -64,6 +64,7 @@ homepageButton.addEventListener('click', function(e) {
     
     setTimeout(() => {
         mainRoomsContainer.classList.remove('hidden');
+        nav.classList.remove('hidden');
     }, 6000);
 })
 
