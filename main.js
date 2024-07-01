@@ -188,6 +188,7 @@ mainRoomsContainer.addEventListener('click', function (e) {
         wifiStatusMessage.classList.toggle('hidden');
         
         if (!wifiStatusMessage.classList.contains('hidden')) {
+            // console.log(isWifiActive);
             const statusMessage = isWifiActive ? 'Wifi connections available' : 'Wifi is currently not available'
             wifiStatusMessage.textContent = statusMessage;
         }
