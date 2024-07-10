@@ -63,6 +63,9 @@ class AdvanceSettings extends General {
                         <canvas id="myChart"></canvas>
                     </div>
                 </section>
+                <button class="close-btn">
+                    <img src="./assets/svgs/close.svg" alt="close button svg icon">
+                </button>
             </section>
         `
     }

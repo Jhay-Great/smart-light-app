@@ -390,12 +390,20 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
     
 
 })
-
-closeButton.addEventListener('click', function() {
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.close-btn')) return;
+    
     const parent = document.querySelector('.advanced_features');
     parent.replaceChildren(parent.firstElementChild); // remove children elements expect the first child
     advancedFeaturesContainer.classList.add('hidden');
 })
+/**initial functionality / still an alternative */
+// closeButton?.addEventListener('click', function() {
+//     console.log('component runs')
+//     const parent = document.querySelector('.advanced_features');
+//     parent.replaceChildren(parent.firstElementChild); // remove children elements expect the first child
+//     advancedFeaturesContainer.classList.add('hidden');
+// })
 
 // const time = (advancedSettings.componentsData.bathroom.autoOn);
 // // advancedSettings.automateLight(time);
