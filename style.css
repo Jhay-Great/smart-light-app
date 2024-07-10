@@ -286,6 +286,7 @@ h1 span:first-child {
     background: var(--white-color);
     background: #ddd;
     color: #111;
+    position: relative;
 
     border: none;
     border-radius: 5px;
@@ -331,8 +332,8 @@ h3 {
     top: 20px;
     right: 20px;
     
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     
     display: flex;
     justify-content: center;
