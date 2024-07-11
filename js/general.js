@@ -6,7 +6,7 @@ class General {
         ['outdoor lights']: { name: 'outdoor lights', numOfLights: 6, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [15, 12, 13, 9, 12, 13, 18] },
         ['guest room']: { name: 'guest room', numOfLights: 4, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [12, 10, 3, 9, 5, 5, 18] },
         kitchen: { name: 'kitchen', numOfLights: 3, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [12, 19, 13, 11, 12, 13, 18] },
-        [['walkway & corridor']]: { name: 'walkway & corridor', numOfLights: 8, isLightOff: false, autoOn: '06:30', autoOff: '22:00', usage: [12, 19, 13, 15, 22, 23, 18] },
+        [['walkway & corridor']]: { name: 'walkway & corridor', numOfLights: 8, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [12, 19, 13, 15, 22, 23, 18] },
     }
 
     constructor () {

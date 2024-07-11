@@ -101,6 +101,56 @@ nav.addEventListener('click', function(e) {
 
         lightController.displayNotification(message, 'afterend', mainRoomsContainer)
         lightController.removeNotification(document.querySelector('.notification'));
+
+        /** general light switch functionality */
+        console.log('.....')
+
+        // get all the lights and loop through them
+        // so loop through the data and set their light to true or whatever that turns them on
+        // console.log(Object.values(lightController.componentsData));
+
+        const allRoomsLight = document.querySelectorAll('.basic_settings_buttons > button:first-child > img');
+        const data = Object.values(lightController.componentsData);
+        const slider = document.querySelector('slider');
+        // console.log(data);
+
+        data.forEach(data => {
+            data.isLightOff = !data.isLightOff;
+        })
+        
+
+        if (!lightController.isLightOff) {
+            lightController.isLightOff = true;
+            allRoomsLight.forEach(room => {
+                const slider = room.closest('.basic_settings').querySelector('.slider input');
+                const roomImage = room.closest('.rooms').querySelector('.rooms > img');
+                
+                const dataValue = ('dataset value: ', room.dataset.lighton);
+                lightController.lightSwitch(room, dataValue);
+                slider.value = 0;
+                roomImage.style.filter = `brightness(${0})`
+    
+            })
+            return;
+        }
+        
+        // FINISH BY TOMORROW!!!!!
+        allRoomsLight.forEach(room => {
+            lightController.isLightOff = false;
+            const slider = room.closest('.basic_settings').querySelector('.slider input');
+            const roomImage = room.closest('.rooms').querySelector('.rooms > img');
+            
+            const dataValue = ('dataset value: ', room.dataset.lighton);
+            lightController.lightSwitch(room, dataValue);
+            slider.value = lightController.lightIntensity;
+            roomImage.style.filter = `brightness(${lightController.lightIntensity / 10})`
+
+        })
+
+        // console.log('light property: ', lightController.isLightOff);
+
+        
+        
     }
     
 })
