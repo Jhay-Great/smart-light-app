@@ -109,6 +109,14 @@ class AdvanceSettings extends General {
         return dailyAlarmTime;
     };
 
+    timeDifference (selectedTime) {
+        const now = new Date();
+        // now.setSeconds();
+        const setTime = this.formatTime(selectedTime) - now;
+        console.log(setTime, now);
+        return setTime;
+    }
+
     async timer (time, message, component) {
         return new Promise ((resolve, reject) => {
             const checkAndTriggerAlarm = () => {
@@ -137,6 +145,8 @@ class AdvanceSettings extends General {
         return await this.timer(formattedTime, false, component);
         
     }
+
+
 
 
 }

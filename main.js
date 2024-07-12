@@ -34,6 +34,8 @@ const advancedSettings = new AdvanceSettings();
 // global variables
 let selectedComponent;
 let isWifiActive = true;
+let countDownArray = [];
+
 
 
 
@@ -385,86 +387,132 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
             timeElement.textContent = updatedTime;
 
             // console.log(advancedSettings.getObjectDetails());
-            const response = await advancedSettings.automateLight(updatedTime, selectedComponent);
+            // const response = await advancedSettings.automateLight(updatedTime, selectedComponent);
 
-            console.log('response from automateLight method: ', response);
+            // console.log('response from automateLight method: ', response);
 
-            console.log(advancedSettings.getObjectDetails());
+            // console.log(advancedSettings.getObjectDetails());
 
-            setInterval(() => {
-                [advancedSettings.getObjectDetails()].forEach(component => {
-                    if (component.isLightOff === false) {
-                        console.log('the light is on...');
+            // console.log(advancedSettings.timeDifference(updatedTime));
 
-                        const queryString = selectedComponent.split(' ').join('_');
+            // const countDown = advancedSettings.timeDifference(updatedTime);
+
+            // countDownArray.push(advancedSettings.getSelectedComponent(selectedComponent))
+
+            const room = advancedSettings.getSelectedComponent(selectedComponent);
+
+            countDownArray = [...countDownArray, room]
+
+            console.log(countDownArray);
+
+
+            // console.log(countDownArray);
+
+            countDownArray.forEach(component => {
+                // console.log(component.name, component.autoOn);
+                const { name, autoOn: time } = component;
+                const countDown = advancedSettings.timeDifference(time);
+
+                // advancedSettings.timeDifference(component.componentsData.autoOn)
                 
-                        // console.log(lightController);
-                        const element = document.querySelector(`.${selectedComponent.includes(' ') ? queryString : selectedComponent}`);
-                        const slider = element.querySelector('input[type="range"]');
-                        const image = element.firstElementChild;
+                setTimeout(() => {
 
-
-                        slider.value = 5;
-                        image.style.filter = `brightness(${.5})`
-                    }
-                })
-            }, 1000);
+                    const queryString = name.split(' ').join('_');
+                    
+                    const element = document.querySelector(`.${name.includes(' ') ? queryString : name}`);
+                    const slider = element.querySelector('input[type="range"]');
+                    const image = element.firstElementChild;
+                    
+                    slider.value = 5;
+                    image.style.filter = `brightness(${.5})`
+                    
+                    console.log('light on...')
+                }, countDown);
+            })
             
             
-            if (response) {
-                // console.log(advancedSettings.getObjectDetails());
+            // setTimeout(() => {
+            //     console.log('light on...')
+            // }, countDown);
+            
+            
 
-                // console.log(selectedComponent.includes(' '));
-                // console.log(selectedComponent.split(' ').join('_'))
 
-                const queryString = selectedComponent.split(' ').join('_');
+            
+            // setInterval(() => {
+            //     [advancedSettings.getObjectDetails()].forEach(component => {
+            //         if (component.isLightOff === false) {
+            //             console.log('the light is on...');
+
+            //             const queryString = selectedComponent.split(' ').join('_');
                 
-                // console.log(lightController);
-                const element = document.querySelector(`.${selectedComponent.includes(' ') ? queryString : selectedComponent}`);
-                const slider = element.querySelector('input[type="range"]');
-                const image = element.firstElementChild;
+            //             // console.log(lightController);
+            //             const element = document.querySelector(`.${selectedComponent.includes(' ') ? queryString : selectedComponent}`);
+            //             const slider = element.querySelector('input[type="range"]');
+            //             const image = element.firstElementChild;
+
+
+            //             slider.value = 5;
+            //             image.style.filter = `brightness(${.5})`
+            //         }
+            //     })
+            // }, 1000);
+            
+            
+            // if (response) {
+            //     // console.log(advancedSettings.getObjectDetails());
+
+            //     // console.log(selectedComponent.includes(' '));
+            //     // console.log(selectedComponent.split(' ').join('_'))
+
+            //     const queryString = selectedComponent.split(' ').join('_');
+                
+            //     // console.log(lightController);
+            //     const element = document.querySelector(`.${selectedComponent.includes(' ') ? queryString : selectedComponent}`);
+            //     const slider = element.querySelector('input[type="range"]');
+            //     const image = element.firstElementChild;
                 
 
 
 
-                // console.log(lightController.componentsData[selectedComponent].isLightOff)
-                // lightController.componentsData[selectedComponent].isLightOff = false;
-                // advancedSettings.setNewData(selectedComponent, 'isLightOff', false);
+            //     // console.log(lightController.componentsData[selectedComponent].isLightOff)
+            //     // lightController.componentsData[selectedComponent].isLightOff = false;
+            //     // advancedSettings.setNewData(selectedComponent, 'isLightOff', false);
 
-                slider.value = 5;
-                image.style.filter = `brightness(${.5})`
-                // console.log('logging elements: ', slider, element);
+            //     slider.value = 5;
+            //     image.style.filter = `brightness(${.5})`
+            //     // console.log('logging elements: ', slider, element);
 
-                console.log(advancedSettings.getObjectDetails());
+            //     console.log(advancedSettings.getObjectDetails());
 
                 
 
-                /**automatic light up
-                 * so when the timer is on or counting
-                 * set the object isLightOff property to false when the timer is up
-                 * and when the timer is up and the isLightOff is false
-                 * then turn the lights on that specific component
-                 *  you loop through the data and the isLightOff property to get the value 
-                 * to know at which component is false or true to alternative light switch
-                 * 
-                 */
+            //     /**automatic light up
+            //      * so when the timer is on or counting
+            //      * set the object isLightOff property to false when the timer is up
+            //      * and when the timer is up and the isLightOff is false
+            //      * then turn the lights on that specific component
+            //      *  you loop through the data and the isLightOff property to get the value 
+            //      * to know at which component is false or true to alternative light switch
+            //      * 
+            //      */
 
-                // console.log(element)
+            //     // console.log(element)
 
-                // console.log(slider);
+            //     // console.log(slider);
 
-                // slider.value = lightController.lightIntensity;
+            //     // slider.value = lightController.lightIntensity;
 
-                // lightController.lightIntensity = 5;
-                // slider.value = lightController.lightIntensity;
+            //     // lightController.lightIntensity = 5;
+            //     // slider.value = lightController.lightIntensity;
                 
-                // lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
-                // componentImg.style.filter = `brightness(${lightController.lightIntensity / 10})`;
-                // lightController.isLightOff = false;
-                // gridLightButtonFunctionality(lightButton, 'lights are on');
-                // return;
+            //     // lightButton.style.filter = `drop-shadow(0 0 ${lightController.lightIntensity}px #ffd600)`; 
+            //     // componentImg.style.filter = `brightness(${lightController.lightIntensity / 10})`;
+            //     // lightController.isLightOff = false;
+            //     // gridLightButtonFunctionality(lightButton, 'lights are on');
+            //     // return;
                 
-            }
+            // }
 
             // console.log(advancedSettings.automateLight(updatedTime, selectedComponent));
 
