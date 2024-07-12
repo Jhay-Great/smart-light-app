@@ -70,7 +70,7 @@ const autoLightSwitch = function (room, number = 5) {
         setTimeout(() => {
 
             const queryString = name.split(' ').join('_');
-            console.log(queryString);
+            // console.log(queryString);
 
             let element;
             
@@ -82,12 +82,17 @@ const autoLightSwitch = function (room, number = 5) {
             }
 
             
-            console.log(element);
+            // console.log(element);
+            const lightBulb = element.querySelector('.basic_settings_buttons img');
             const slider = element.querySelector('input[type="range"]');
             const image = element.firstElementChild;
+            const lightDataset = lightBulb.dataset.lighton;
+
+            console.log(lightBulb, lightDataset)
             
             slider.value = number;
-            image.style.filter = `brightness(${number / 10})`
+            image.style.filter = `brightness(${number / 10})`;
+            lightController.lightSwitch(lightBulb, lightDataset);
             // slider.value = 5;
             // image.style.filter = `brightness(${.5})`
             
@@ -145,6 +150,7 @@ nav.addEventListener('click', function(e) {
         lightController.removeNotification(document.querySelector('.notification'));
 
         /** general light switch functionality */
+        if (!isWifiActive) return; // deactivating light switch
         console.log('.....')
 
         // get all the lights and loop through them
@@ -608,11 +614,16 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
 
                     const slider = element.querySelector('input[type="range"]');
                     const image = element.firstElementChild;
+                    const lightBulb = element.querySelector('.basic_settings_buttons img');
+                    const lightDataset = lightBulb.dataset.lighton;
+
                     
                     slider.value = 0;
                     image.style.filter = `brightness(${0})`
+                    lightController.lightSwitch(lightBulb, lightDataset);
+
                     
-                    console.log('light on...')
+                    console.log('light off...')
                 }, countDown);
             })
             

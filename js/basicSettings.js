@@ -43,6 +43,7 @@ class Light extends General {
     }
 
     lightSwitch (lightButtonElement, dataAttributeValue, temp) {
+        console.log('called...')
         temp = lightButtonElement.attributes[0].textContent;
         lightButtonElement.setAttribute('src', dataAttributeValue);
         lightButtonElement.setAttribute('data-lightOn', temp);
