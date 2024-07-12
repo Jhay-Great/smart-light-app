@@ -616,11 +616,20 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
                     const image = element.firstElementChild;
                     const lightBulb = element.querySelector('.basic_settings_buttons img');
                     const lightDataset = lightBulb.dataset.lighton;
+                    let temp
+
+                    console.log(lightBulb, lightDataset)
 
                     
                     slider.value = 0;
                     image.style.filter = `brightness(${0})`
-                    lightController.lightSwitch(lightBulb, lightDataset);
+                    // lightController.lightSwitch(lightBulb, lightDataset);
+
+                    lightController.lightSwitchOff(lightBulb);
+
+                    // temp = lightButtonElement.attributes[0].textContent;
+                    // lightButtonElement.setAttribute('src', dataAttributeValue);
+                    // lightButtonElement.setAttribute('data-lightOn', temp);
 
                     
                     console.log('light off...')

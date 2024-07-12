@@ -43,11 +43,25 @@ class Light extends General {
     }
 
     lightSwitch (lightButtonElement, dataAttributeValue, temp) {
-        console.log('called...')
+        console.log('called...', lightButtonElement)
         temp = lightButtonElement.attributes[0].textContent;
         lightButtonElement.setAttribute('src', dataAttributeValue);
         lightButtonElement.setAttribute('data-lightOn', temp);
-    }
+    };
+
+    lightSwitchOff (lightButtonElement, dataAttributeValue, temp) {
+        console.log('called...', lightButtonElement)
+        // temp = lightButtonElement.attributes[0].textContent;
+        // lightButtonElement.setAttribute('src', dataAttributeValue); // ./assets/svgs/light_bulb_off.svg
+        // lightButtonElement.setAttribute('data-lightOn', temp); // /assets/svgs/light_bulb.svg
+
+        lightButtonElement.setAttribute('src', './assets/svgs/light_bulb_off.svg');
+        lightButtonElement.setAttribute('data-lightOn', './assets/svgs/light_bulb.svg');
+
+
+
+    };
+
 
 }
 
