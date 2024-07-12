@@ -95,6 +95,7 @@ nav.addEventListener('click', function(e) {
     }
 
     // toggling light switch
+    // TODO: REFRACT THIS ENTIRE LOGIC
     if (current.closest('.general_light_switch')) {
         const message = `Feature not accessible yet.
                          This feature is a general switch for all components.`
@@ -374,7 +375,7 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
         const { value } = inputElement;
         if (value === '') return;
         inputElement.value = '';
-        console.log(selectedComponent);
+        // console.log(selectedComponent);
         
         if (currentElement.classList.contains('defaultOn-okay')) {
             let timeElement = currentElement.closest('.advanced_features').querySelector('.auto_on span:last-child');
@@ -382,21 +383,77 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
             const updatedTime = advancedSettings.setNewData(selectedComponent, 'autoOn', value)
             
             timeElement.textContent = updatedTime;
+
+            // console.log(advancedSettings.getObjectDetails());
             const response = await advancedSettings.automateLight(updatedTime, selectedComponent);
 
-            // console.log(response);
-            if (response) {
-                // console.log('hi');
+            console.log('response from automateLight method: ', response);
 
+            console.log(advancedSettings.getObjectDetails());
+
+            setInterval(() => {
+                [advancedSettings.getObjectDetails()].forEach(component => {
+                    if (component.isLightOff === false) {
+                        console.log('the light is on...');
+
+                        const queryString = selectedComponent.split(' ').join('_');
+                
+                        // console.log(lightController);
+                        const element = document.querySelector(`.${selectedComponent.includes(' ') ? queryString : selectedComponent}`);
+                        const slider = element.querySelector('input[type="range"]');
+                        const image = element.firstElementChild;
+
+
+                        slider.value = 5;
+                        image.style.filter = `brightness(${.5})`
+                    }
+                })
+            }, 1000);
+            
+            
+            if (response) {
+                // console.log(advancedSettings.getObjectDetails());
+
+                // console.log(selectedComponent.includes(' '));
+                // console.log(selectedComponent.split(' ').join('_'))
+
+                const queryString = selectedComponent.split(' ').join('_');
+                
                 // console.log(lightController);
-                const slider = document.querySelector('input[type="range"]');
-                const element = document.querySelector(`.${selectedComponent}`);
+                const element = document.querySelector(`.${selectedComponent.includes(' ') ? queryString : selectedComponent}`);
+                const slider = element.querySelector('input[type="range"]');
+                const image = element.firstElementChild;
+                
+
+
+
+                // console.log(lightController.componentsData[selectedComponent].isLightOff)
+                // lightController.componentsData[selectedComponent].isLightOff = false;
+                // advancedSettings.setNewData(selectedComponent, 'isLightOff', false);
+
+                slider.value = 5;
+                image.style.filter = `brightness(${.5})`
+                // console.log('logging elements: ', slider, element);
+
+                console.log(advancedSettings.getObjectDetails());
+
+                
+
+                /**automatic light up
+                 * so when the timer is on or counting
+                 * set the object isLightOff property to false when the timer is up
+                 * and when the timer is up and the isLightOff is false
+                 * then turn the lights on that specific component
+                 *  you loop through the data and the isLightOff property to get the value 
+                 * to know at which component is false or true to alternative light switch
+                 * 
+                 */
 
                 // console.log(element)
 
                 // console.log(slider);
 
-                slider.value = lightController.lightIntensity;
+                // slider.value = lightController.lightIntensity;
 
                 // lightController.lightIntensity = 5;
                 // slider.value = lightController.lightIntensity;
@@ -409,7 +466,7 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
                 
             }
 
-            console.log(advancedSettings.automateLight(updatedTime, selectedComponent));
+            // console.log(advancedSettings.automateLight(updatedTime, selectedComponent));
 
             // advancedSettings.automateLight(updatedTime);
 

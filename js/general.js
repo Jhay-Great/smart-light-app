@@ -1,6 +1,6 @@
 class General {
     componentsData = {
-        hall: { name: 'hall', numOfLights: 6, isLightOff: false, autoOn: '06:30', autoOff: '22:00', usage: [22, 11, 12, 10, 12, 17, 22] }, 
+        hall: { name: 'hall', numOfLights: 6, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [22, 11, 12, 10, 12, 17, 22] }, 
         bedroom: { name: 'bedroom', numOfLights: 3, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [18, 5, 7, 5, 6, 6, 18] },
         bathroom: { name: 'bathroom', numOfLights: 1, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [2, 1, 1, 1, 1, 3, 3] },
         ['outdoor lights']: { name: 'outdoor lights', numOfLights: 6, isLightOff: true, autoOn: '06:30', autoOff: '22:00', usage: [15, 12, 13, 9, 12, 13, 18] },

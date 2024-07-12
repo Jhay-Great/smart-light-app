@@ -86,6 +86,7 @@ class AdvanceSettings extends General {
 
     setNewData (component, key, data) {
         const selectedComponent = this.componentsData[component.toLowerCase()];
+        // console.log(selectedComponent);
         return selectedComponent[key] = data;
     }
 
@@ -118,7 +119,7 @@ class AdvanceSettings extends General {
                     now.getMinutes() === time.getMinutes() &&
                     now.getSeconds() === time.getSeconds()
                 ) {
-                    console.log(message);
+                    // console.log(message);
                     this.isLightOff = false;
                     this.componentsData[component].isLightOff = message;
                     resolve (this.componentsData[component].isLightOff)
@@ -133,7 +134,7 @@ class AdvanceSettings extends General {
 
     async automateLight (time, component) {
         const formattedTime = this.formatTime(time);
-        return await this.timer(formattedTime, true, component);
+        return await this.timer(formattedTime, false, component);
         
     }
 
