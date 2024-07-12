@@ -57,6 +57,45 @@ const gridLightButtonFunctionality = function(lightButton, notificationMessage) 
             return;
 }
 
+const autoLightSwitch = function (room, number = 5) {
+    countDownArray = [...countDownArray, room]
+
+    countDownArray.forEach(component => {
+        // console.log(component.name, component.autoOn);
+        const { name, autoOn: time } = component;
+        const countDown = advancedSettings.timeDifference(time);
+
+        // advancedSettings.timeDifference(component.componentsData.autoOn)
+        
+        setTimeout(() => {
+
+            const queryString = name.split(' ').join('_');
+            console.log(queryString);
+
+            let element;
+            
+            if (name === 'walkway & corridor') {
+                element = document.querySelector('.corridor')
+            } else {
+                element = document.querySelector(`.${name.includes(' ') ? queryString : name}`);
+
+            }
+
+            
+            console.log(element);
+            const slider = element.querySelector('input[type="range"]');
+            const image = element.firstElementChild;
+            
+            slider.value = number;
+            image.style.filter = `brightness(${number / 10})`
+            // slider.value = 5;
+            // image.style.filter = `brightness(${.5})`
+            
+            console.log('light on...')
+        }, countDown);
+    })
+}
+
 
 // Event handlers
 // hidden homepage after button is clicked
@@ -371,6 +410,13 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
  
         return;
     }
+
+    // general variables for this section
+    const room = advancedSettings.getSelectedComponent(selectedComponent);
+
+    // countDownArray = [...countDownArray, room]
+
+    // console.log(countDownArray);
     
     if (currentElement.textContent === 'Okay') {
         const inputElement = currentElement.parentElement.parentElement.querySelector('input');
@@ -399,36 +445,40 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
 
             // countDownArray.push(advancedSettings.getSelectedComponent(selectedComponent))
 
-            const room = advancedSettings.getSelectedComponent(selectedComponent);
 
-            countDownArray = [...countDownArray, room]
+            /** NOTE: very important */
+            // const room = advancedSettings.getSelectedComponent(selectedComponent);
+
+            // countDownArray = [...countDownArray, room]
 
             console.log(countDownArray);
 
 
             // console.log(countDownArray);
 
-            countDownArray.forEach(component => {
-                // console.log(component.name, component.autoOn);
-                const { name, autoOn: time } = component;
-                const countDown = advancedSettings.timeDifference(time);
+            // countDownArray.forEach(component => {
+            //     // console.log(component.name, component.autoOn);
+            //     const { name, autoOn: time } = component;
+            //     const countDown = advancedSettings.timeDifference(time);
 
-                // advancedSettings.timeDifference(component.componentsData.autoOn)
+            //     // advancedSettings.timeDifference(component.componentsData.autoOn)
                 
-                setTimeout(() => {
+            //     setTimeout(() => {
 
-                    const queryString = name.split(' ').join('_');
+            //         const queryString = name.split(' ').join('_');
                     
-                    const element = document.querySelector(`.${name.includes(' ') ? queryString : name}`);
-                    const slider = element.querySelector('input[type="range"]');
-                    const image = element.firstElementChild;
+            //         const element = document.querySelector(`.${name.includes(' ') ? queryString : name}`);
+            //         const slider = element.querySelector('input[type="range"]');
+            //         const image = element.firstElementChild;
                     
-                    slider.value = 5;
-                    image.style.filter = `brightness(${.5})`
+            //         slider.value = 5;
+            //         image.style.filter = `brightness(${.5})`
                     
-                    console.log('light on...')
-                }, countDown);
-            })
+            //         console.log('light on...')
+            //     }, countDown);
+            // })
+
+            autoLightSwitch(room);
             
             
             // setTimeout(() => {
@@ -528,6 +578,44 @@ advancedFeaturesContainer.addEventListener('click', async function(e) {
 
             const updatedTime = advancedSettings.setNewData(selectedComponent, 'autoOff', value)
             timeElement.textContent = updatedTime;
+
+            countDownArray = [...countDownArray, room]
+            console.log(countDownArray, room);
+
+            // autoLightSwitch(room, 0);
+
+            // NOTE: to be refracted later
+            countDownArray.forEach(component => {
+                // console.log(component.name, component.autoOn);
+                const { name, autoOff: time } = component;
+                const countDown = advancedSettings.timeDifference(time);
+
+                // advancedSettings.timeDifference(component.componentsData.autoOn)
+                
+                setTimeout(() => {
+
+                    const queryString = name.split(' ').join('_');
+                    
+                    let element;
+            
+                    if (name === 'walkway & corridor') {
+                        element = document.querySelector('.corridor')
+                    } else {
+                        element = document.querySelector(`.${name.includes(' ') ? queryString : name}`);
+        
+                    }
+                    // const element = document.querySelector(`.${name.includes(' ') ? queryString : name}`);
+
+                    const slider = element.querySelector('input[type="range"]');
+                    const image = element.firstElementChild;
+                    
+                    slider.value = 0;
+                    image.style.filter = `brightness(${0})`
+                    
+                    console.log('light on...')
+                }, countDown);
+            })
+            
             return;
         }
 
